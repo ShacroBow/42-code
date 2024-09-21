@@ -26,19 +26,20 @@ static int	ft_strlen_strlcpy(char *str)
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	len_dst;
 	size_t	len_src;
 	size_t	i;
 
-	len_dst = ft_strlen_strlcpy(dst);
 	len_src = ft_strlen_strlcpy((char *)src);
+	if (size == 0)
+		return (len_src);
 	i = 0;
-	while ((len_dst + i + 1) < size)
+	while (i < size - 1 && src[i] != '\0')
 	{
-		dst[len_dst + i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
-	dst[len_dst + i] = '\0';
+	if (size > 0)
+		dst[i] = '\0';
 	return (len_src);
 }
 /* 
@@ -48,15 +49,15 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 int	main(void)
 {
 	char dst[50] = "Hello, ";
-	const char src[] = "world!";
+	const char src[] = "lorem ipsum";
 	
 	char dst2[50] = "Hello, ";
-	const char src2[] = "world!";
+	const char src2[] = "lorem ipsum";
 	
-	printf("Resulting length: %lu\n", ft_strlcpy(dst, src, 1));
+	printf("Resulting length: %lu\n", ft_strlcpy(dst, src, 15));
 	printf("my script: %s\n", dst);
 
-	printf("2Resulting length: %lu\n", strlcpy(dst2, src2, 1));
+	printf("2Resulting length: %lu\n", strlcpy(dst, src2, 15));
 	printf("2original script: %s\n", dst);
 	return 0;
 } */
