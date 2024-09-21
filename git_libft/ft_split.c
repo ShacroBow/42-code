@@ -72,6 +72,7 @@ static int	ft_free_split(char **ptrptr, char *ptr, int i)
 			ptrptr[i] = NULL;
 			i--;
 		}
+		free(ptrptr);
 		return (1);
 	}
 	else

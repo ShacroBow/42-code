@@ -21,7 +21,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	ptr = (unsigned char *)s;
 	while (i != n)
 	{
-		ptr[i] = c;
+		ptr[i] = (unsigned char)c;
 		i++;
 	}
 	return (s);
@@ -38,10 +38,10 @@ int main()
 	printf("Before ft_memset(): %s\n", str2); 
 
 
-	ptr = memset(str + 14, 828, 9*sizeof(char)); 
+	ptr = memset(str + 14, '0', 9*sizeof(char)); 
 	printf("After memset():     %s\n", ptr);
 
-	ptr = ft_memset(str2 + 14, 48, 9*sizeof(char)); 
+	ptr = ft_memset(str2 + 14, '0', 9*sizeof(char)); 
 	printf("After ft_memset():  %s\n", ptr); 
 	return 0; 
 } */

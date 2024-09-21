@@ -25,7 +25,7 @@ static size_t	ft_strlen_strdup(const char *str)
 	return (i);
 }
 
-char	*ft_strcpy_strdup(char *dest, const char *src)
+static char	*ft_strcpy_strdup(char *dest, const char *src)
 {
 	int	i;
 
