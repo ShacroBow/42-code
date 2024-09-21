@@ -44,20 +44,20 @@ void	swap(int *arr, int i, int j)
 	arr[i] = arr[j];
 	arr[j] = temp;
 }
-void printArray(int arr[], int size)
+/* void printArray(int arr[], int size)
 {
-    int i;
-    for (i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
+	int i;
+	for (i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
 }
-
 
 int main() 
 {
-    int hel[6]={9,6,10,8,5,7};
-    printArray(hel,6);
+	int hel[6]={9,6,10,8,5,7};
+	printArray(hel,6);
 	ft_sort_int_tab	(hel,6);
 	printArray(hel,6);
-    return 0;
+	return 0;
 }
+ */

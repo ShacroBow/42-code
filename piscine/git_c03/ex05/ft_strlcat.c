@@ -50,7 +50,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	dest[len_dst] = '\0';
 	return (rem);
 }
-
+/* 
 int	main(void)
 {
 	char dest[50] = "Hello, ";
@@ -66,4 +66,4 @@ int	main(void)
 	printf("2Resulting length: %lu\n", strlcat(dest2, src2, 4));
 	printf("2original script: %s\n", dest);
 	return 0;
-}
+} */

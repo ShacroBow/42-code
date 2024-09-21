@@ -30,7 +30,7 @@ void	ft_rev_int_tab(int *tab, int size)
 		i_end--;
 	}
 }
-
+/* 
 int main() 
 {
     int hel[6]={5,6,7,9,10};
@@ -39,3 +39,4 @@ int main()
 	printf("%s", hel);
     return 0;
 }
+ */

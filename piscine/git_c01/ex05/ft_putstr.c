@@ -20,7 +20,7 @@ void	ft_putstr(char *str)
 		str++;
 	}
 }
-
+/* 
 int main()
 {
 	char *s;
@@ -29,3 +29,4 @@ int main()
 
 	return 0;
 }
+ */

@@ -16,7 +16,7 @@ void	ft_ultimate_ft(int *********nbr)
 {
 	*********nbr = 42;
 }
-int main() {
+/* int main() {
     int a = 0;
     int *ptr1 = &a;
     int **ptr2 = &ptr1;
@@ -34,3 +34,4 @@ int main() {
 
     return 0;
 }
+ */
