@@ -6,44 +6,48 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:57:09 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/19 12:11:19 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:11:19 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-static size_t	ft_strlen_strtrim(const char *str)
+static char	*ft_strrev(const char *str)
 {
+	size_t	len;
 	size_t	i;
+	char	*reversed;
 
 	i = 0;
-	while (*str != '\0')
+	len = 0;
+	if (!str)
+		return (NULL);
+	while (str[len] != '\0')
+		len++;
+	reversed = (char *)malloc(len + 1);
+	if (!reversed)
+		return (NULL);
+	while (i < len)
 	{
+		reversed[i] = str[(len - 1) - i];
 		i++;
-		str++;
 	}
-	return (i);
+	reversed[len] = '\0';
+	return (reversed);
 }
 
-static char	*ft_strnstr_strtrim(const char *big, const char *little, size_t len)
+static char	*ft_strcheck_strtrim(const char *big,
+								const char *little, size_t len)
 {
 	size_t	i;
-	size_t	j;
-	char	*ptr;
 
+	if (big[0] == '\0')
+		return ((char *)big);
 	i = 0;
-	ptr = (char *)big;
-	if (big[0] == '\0' || little[0] == '\0')
-		return (ptr);
-	while (big[i] != '\0' && i < len)
+	while (big[i] != '\0' && big[i] == little[i] && i < len)
 	{
-		j = 0;
-		while (big[i + j] != '\0' && big[i + j] == little[j] && (i + j) < len)
-		{
-			if (little[j + 1] == '\0')
-				return (ptr + i);
-			++j;
-		}
+		if (little[i + 1] == '\0')
+			return ((char *)big + i);
 		++i;
 	}
 	return (0);
@@ -54,10 +58,14 @@ static char	*ft_supermalloc_strtrim(int k, int i, int j)
 	char	*ptr;
 
 	if (k == 3)
-		ptr = (char *) malloc((i - (j * 2)) + 1);
+		ptr = (char *)ft_calloc((i - (j * 2)) + 1, sizeof(char));
 	if (k == 2 || k == 1)
-		ptr = (char *) malloc((i - j) + 1);
-	else if (k < 1 || k > 3)
+		ptr = (char *)ft_calloc((i - j) + 1, sizeof(char));
+	if (k == 0)
+		ptr = (char *)ft_calloc((i + 1), sizeof(char));
+	else if (k < 0 || k > 3)
+		return (0);
+	if (!ptr)
 		return (0);
 	return (ptr);
 }
@@ -69,77 +77,69 @@ static char	*ft_strcpy_trim(const char *s1, int k, int i, int j)
 
 	hel = 0;
 	ptr = ft_supermalloc_strtrim(k, i, j);
-	while (k == 3 && hel < (i - (j * 2)))
+	if (!ptr)
+		return (NULL);
+	while (hel < i && (k >= 0 || k <= 3))
 	{
-		ptr[hel] = s1[hel + j];
+		if (k == 3 && hel < (i - (j * 2)))
+			ptr[hel] = s1[hel + j];
+		else if (k == 2 && hel < i - j)
+			ptr[hel] = s1[hel];
+		else if ((k == 1) && hel < i - j)
+			ptr[hel] = s1[hel + j];
+		else if (k == 0)
+			ptr[hel] = s1[hel];
 		hel++;
 	}
-	while (k == 2 && hel < i - j)
-	{
-		ptr[hel] = s1[hel];
-		hel++;
-	}
-	while (k == 1 && hel < i - j)
-	{
-		ptr[hel] = s1[hel + j];
-		hel++;
-	}
-	ptr[hel] = '\0';
 	return (ptr);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
 	int		j;
 	int		k;
 	char	*ptr;
-	char	*strnstr_check;
 
-	k = 0;
-	if (s1 == 0 || set == 0)
+	if (!s1 || !set)
 		return (0);
-	i = ft_strlen_strtrim(s1);
-	j = ft_strlen_strtrim(set);
-	strnstr_check = ft_strnstr_strtrim(s1, set, i);
-	if (strnstr_check == s1)
-	{
+	j = ft_strlen(set);
+	k = 0;
+	if (ft_strcheck_strtrim(s1, set, j))
 		k += 1;
-	}
-	strnstr_check = ft_strnstr_strtrim(s1 + j, set, i - j);
-	if (strnstr_check == (s1 +(i - j)))
-	{
+	ptr = ft_strrev(s1);
+	if (ft_strcheck_strtrim(s1 + (ft_strlen(s1) - j), set, j)
+		|| ft_strcheck_strtrim(ptr, set, j))
 		k += 2;
-	}
-	ptr = ft_strcpy_trim(s1, k, i, j);
+	if (ptr)
+		free(ptr);
+	ptr = ft_strcpy_trim(s1, k, ft_strlen(s1), j);
 	return (ptr);
 }
-/* #include <stdio.h>
+/* 
+#include <stdio.h>
 
 int main()
 {
-	
 	// char *string = "easypeasy.com";
 	// char *set = ".com";
 	// char *set2 = "easy";
 	// char *string = "HelloHilHiHello";
 	// char *set = "Hello";
 	// char *set2 = "Hi";
-	char *string = "xXDARKNESSXx";
+	char *string = "xXDARKxNESSXx";
 	char *set = "x";
 	char *set2 = "X";
-	
 	char *ptr;
-	char *FREETEMP;
-	printf("string untrimed: %s\n", string);
+	char *ptr2;
+	
+	printf("string untrimmed: %s\n", string); 
 
 	ptr = ft_strtrim(string, set);
-	printf("string trimed: %s\n", ptr);
-	FREETEMP = ptr;
-	ptr = ft_strtrim(ptr, set2);
-	printf("string trimed2: %s\n", ptr);
-	free(FREETEMP);
+	printf("string trimmed:   %s\n", ptr);
+	
+	ptr2 = ft_strtrim(ptr, set2);
+	printf("string trimmed:   %s\n", ptr2);
 	free(ptr);
-
+	free(ptr2);
 	return 0;
 } */

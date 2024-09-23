@@ -10,20 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static size_t	ft_strlen_strjoin(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (*str != '\0')
-	{
-		i++;
-		str++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 static char	*ft_strjoincalc_strjoin(char *ptr, const char *s1, const char *s2)
 {
@@ -32,8 +19,8 @@ static char	*ft_strjoincalc_strjoin(char *ptr, const char *s1, const char *s2)
 	int	k;
 
 	i = 0;
-	j = ft_strlen_strjoin(s1);
-	k = ft_strlen_strjoin(s2);
+	j = ft_strlen(s1);
+	k = ft_strlen(s2);
 	while (j != 0 && i < j)
 	{
 		ptr[i] = s1[i];
@@ -59,10 +46,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		k;
 	char	*ptr;
 
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	j = ft_strlen_strjoin(s1);
-	k = ft_strlen_strjoin(s2);
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	else if (*s1 == '\0' && *s2 == '\0')
+		return (ft_strdup(""));
+	j = ft_strlen(s1);
+	k = ft_strlen(s2);
 	ptr = (char *)malloc(k + j + 1);
 	if (!ptr)
 		return (0);
@@ -73,8 +62,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 int	main(void)
 {
-	char string[50] = "Fourty ";
-	char string2[50] = "two";
+	char string[50] = "\0";
+	char string2[50] = "\0";
 	char *ptr;
 	
 	ptr = ft_strjoin(string, string2);

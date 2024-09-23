@@ -32,18 +32,16 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t	sizecheck;
 	void	*ptr;
 
-	if (!nmemb || !size)
-		return (0);
 	sizecheck = nmemb * size;
-	if ((sizecheck / size) != nmemb)
-		return (0);
+	if (sizecheck != 0 && sizecheck / nmemb != size)
+		return (NULL);
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (0);
 	ptr = ft_memset_calloc(ptr, '\0', nmemb * size);
 	return (ptr);
 }
-/*#include <stdio.h>
+/* #include <stdio.h>
 
 void ft_printarray(int *array, int amount)
 {
@@ -54,24 +52,26 @@ void ft_printarray(int *array, int amount)
 }
 
 int main() {
-	int amount = 30;
+	int amount = 4;
 	int *array;
 
-	array = (int *)ft_calloc(amount, sizeof(int));
+	array = (int *)ft_calloc(amount, 0);
 	if (!array)
 	{ 
-		printf("fail:\n");
-		return 0;
+		printf("me fail:\n");
 	}
-	printf("My script array values:\n");
-	ft_printarray(array, amount);
-	printf("\n");
-	free(array);
+	if (array)
+	{
+		printf("My script array values:\n");
+		ft_printarray(array, amount);
+		printf("\n");
+		free(array);
+	}
 
-	array = (int *)calloc(amount, sizeof(int));
+	array = (int *)calloc(amount, 1);
 	if (!array)
 	{
-		printf("fail:\n");
+		printf("Og fail:\n");
 		return 0;
 	}
 	printf("Original script array values:\n");

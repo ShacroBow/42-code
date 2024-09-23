@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		i++;
 	}
-	if (ptr[i] == c)
+	if (ptr[i] == (unsigned char)c)
 		return (ptr + i);
 	while (i != 0)
 	{
@@ -57,7 +57,7 @@ int main()
 	result = ft_strrchr(str, 'w');
 	printf("5my script       %s\n", result);
 
-	result = ft_strrchr(str, '!');
+	result = ft_strrchr("teste", '\0');
 	printf("6my script       %s\n\n", result);
 
 	result = strrchr(str, '4');
@@ -75,7 +75,7 @@ int main()
 	result = strrchr(str, 'w');
 	printf("5original script %s\n", result);
 	
-	result = strrchr(str, '!');
+	result = strrchr("teste", '\0');
 	printf("6original script %s\n", result);
 	return 0;
 } */

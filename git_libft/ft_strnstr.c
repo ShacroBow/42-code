@@ -20,8 +20,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 	i = 0;
 	ptr = (char *)big;
-	if (big[0] == '\0' || little[0] == '\0')
+	if (little[0] == '\0')
 		return (ptr);
+	if (len == 0 || ft_strlen(big) < ft_strlen(little))
+		return (NULL);
 	while (big[i] != '\0' && i < len)
 	{
 		j = 0;
@@ -33,9 +35,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		}
 		++i;
 	}
-	return (0);
+	return (NULL);
 }
-/*
+/* 
 #include <stdio.h>
 #include <bsd/string.h>
 
@@ -59,7 +61,7 @@ int main()
 	result = ft_strnstr(str, "HELLO", 30);
 	printf("5my script       %s\n", result);
 	
-	result = ft_strnstr(str, "", 30);
+	result = ft_strnstr("", "coucou", 15);
 	printf("6my script       %s\n\n", result);
 
 	result = strnstr(str, "world", 12);
@@ -77,7 +79,7 @@ int main()
 	result = strnstr(str, "HELLO", 30);
 	printf("5original script %s\n", result);
 	
-	result = strnstr(str, "", 30);
+	result = strnstr("", "coucou", 15);
 	printf("6original script %s\n", result);
 	return 0;
 } */

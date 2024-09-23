@@ -116,7 +116,7 @@ int main()
 
 	printf("strings=[%s]\n\n", strings);
 
-	arrayX2 = ft_split(strings, ',');
+	arrayX2 = ft_split("hello!zzzzzzzz", 'z');
 	
 	
 	if (arrayX2)

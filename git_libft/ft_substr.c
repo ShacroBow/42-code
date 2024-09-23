@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -20,21 +20,18 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	ptr = (char *)malloc(1 * len + 1);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	ptr = (char *)malloc(sizeof(char) * len + 1);
 	if (!ptr)
-		return (0);
-	while (i < len && s[start + i] != '\0' && ptr != 0)
+		return (NULL);
+	while (i < len && s[start + i] != '\0')
 	{
 		ptr[i] = s[start + i];
 		i++;
 	}
-	if (i == len && len != 0)
-	{
-		ptr[i] = '\0';
-		return (ptr);
-	}
-	free(ptr);
-	return (0);
+	ptr[i] = '\0';
+	return (ptr);
 }
 /* #include <stdio.h>
 
@@ -42,7 +39,7 @@ int	main(void)
 {
 	char string[50] = "Hello this is the string that will be subbed";
 	char *ptr;
-	
+
 	ptr = ft_substr(string, 3, 41);
 	printf("my substring: %s\n", ptr);
 	free(ptr);
