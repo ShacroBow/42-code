@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 15:40:35 by kmashkoo          #+#    #+#             */
+/*   Updated: 2024/09/24 15:40:52 by kmashkoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return NULL;
+		return (NULL);
 	while (lst->next)
 	{
 		lst = lst->next;
 	}
-	return lst;
+	return (lst);
 }
 /* 
 #include <stdio.h>

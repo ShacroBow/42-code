@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 15:41:02 by kmashkoo          #+#    #+#             */
+/*   Updated: 2024/09/24 15:41:37 by kmashkoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst = NULL;
+	t_list	*new_lst;
 	t_list	*new_cont;
 	void	*ptr;
 
+	new_lst = NULL;
 	if (!lst || !f || !del)
 		return (NULL);
-	
 	while (lst)
 	{
 		ptr = ft_lstnew(f(lst->content));

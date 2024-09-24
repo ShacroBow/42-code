@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 15:39:03 by kmashkoo          #+#    #+#             */
+/*   Updated: 2024/09/24 15:39:55 by kmashkoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list *copy;
+	t_list	*copy;
 
 	if (lst && *lst && del)
 	{
@@ -13,7 +24,7 @@ void ft_lstclear(t_list **lst, void (*del)(void*))
 			ft_lstdelone(*lst, del);
 			*lst = copy;
 		}
-	*lst = NULL;
+		*lst = NULL;
 	}
 }
 /* 
