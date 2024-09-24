@@ -1,6 +1,8 @@
+
 #include "libft.h"
 
-void ft_lstadd_back(t_list **lst, t_list *new) {
+void ft_lstadd_back(t_list **lst, t_list *new)
+{
 	t_list *last;
 
 	if (lst && new) {
@@ -11,32 +13,37 @@ void ft_lstadd_back(t_list **lst, t_list *new) {
 			last->next = new;
 	}
 }
-
+/* 
 #include <stdio.h>
 
-void print_list(t_list *lst) {
-	while (lst) {
+void print_lst(t_list *lst)
+{
+	while (lst)
+	{
 		printf("%s -> ", (char *)lst->content);
 		lst = lst->next;
 	}
 	printf("NULL\n");
 }
 
-int main() {
-	t_list *list = NULL;
-
-	// Create new nodes
-	t_list *node1 = ft_lstnew("Node 1");
-	t_list *node2 = ft_lstnew("Node 2");
-	t_list *node3 = ft_lstnew("Node 3");
-
-	// Add nodes to the list
-	ft_lstadd_back(&list, node1);
-	ft_lstadd_back(&list, node2);
-	ft_lstadd_back(&list, node3);
-
-	// Print the list to verify
-	print_list(list);
-
-	return 0;
+static void del(void *content)
+{
+	free(content);
 }
+
+int main()
+{
+	t_list *node1 = ft_lstnew(ft_strdup("4"));
+	node1->next = ft_lstnew(ft_strdup("2"));
+	node1->next->next = ft_lstnew(ft_strdup("21"));
+
+	print_lst(node1);
+
+	t_list *node2 = ft_lstnew(ft_strdup("node2"));
+	ft_lstadd_back(&node1, node2);
+
+	print_lst(node1);
+
+	ft_lstclear(&node1, &del);
+	return 0;
+}*/

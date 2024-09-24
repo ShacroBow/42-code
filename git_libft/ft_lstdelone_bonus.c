@@ -1,3 +1,4 @@
+
 #include "libft.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
@@ -8,3 +9,21 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 		free(lst);
 	}
 }
+/* 
+#include <stdio.h>
+static void del(void *content)
+{
+	free(content);
+}
+
+int main()
+{
+	char *ptr = "Hello, World!";
+	t_list *node = ft_lstnew(malloc( ft_strlen(ptr) * sizeof(char)));
+	if (node) {
+		ft_memcpy(node->content, ptr, ft_strlen(ptr));
+		printf("Node content before deletion: %s\n", (char *)node->content);
+		ft_lstdelone(node, &del);
+	}
+	return 0;
+} */
