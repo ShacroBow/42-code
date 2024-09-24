@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:57:09 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/23 17:11:19 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:49:45 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	*ft_strcpy_trim(const char *s1, int k, int i, int j)
 	ptr = ft_supermalloc_strtrim(k, i, j);
 	if (!ptr)
 		return (NULL);
-	while (hel < i && (k >= 0 || k <= 3))
+	while (hel < i && (k >= 0 && k <= 3))
 	{
 		if (k == 3 && hel < (i - (j * 2)))
 			ptr[hel] = s1[hel + j];
