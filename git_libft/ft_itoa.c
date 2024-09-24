@@ -22,6 +22,8 @@ static char	*ft_handlethisoneannoyingthingonly_itoa(int n)
 	{
 		message = "-2147483648";
 		ptr = (char *)malloc(12);
+		if (!ptr)
+			return (NULL);
 		i = 0;
 		while (message[i] != '\0')
 		{
