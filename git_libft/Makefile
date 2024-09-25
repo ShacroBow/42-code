@@ -21,19 +21,24 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+	$(AR) $(ARFLAGS) $(NAME) $?
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-bonus: $(OBJ_BONUS) $(OBJ)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ_BONUS) $(OBJ)
+BONUS_FLAG = .bonus
+
+$(BONUS_FLAG) : $(OBJ_BONUS)
+	$(AR) $(ARFLAGS) $(NAME) $?
+	@touch $(BONUS_FLAG)
+
+bonus: $(NAME) $(BONUS_FLAG)
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	rm -f $(NAME) a.out
+	rm -f $(NAME) a.out $(BONUS_FLAG)
 
 re: fclean all
 
