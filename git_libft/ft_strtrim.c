@@ -31,6 +31,34 @@ char	*ft_strtrim(char const *s1, char const *set)
 		ft_strlcpy(trim, &s1[start], end - start + 1);
 	return (trim);
 }
+/* 
+#include <stdio.h>
+
+int main()
+{
+	// char *string = "easypeasy.com";
+	// char *set = ".com";
+	// char *set2 = "easy";
+	// char *string = "HelloHilHiHello";
+	// char *set = "Hello";
+	// char *set2 = "Hi";
+	char *string = "xXDARKxNESSXx";
+	char *set = "x";
+	char *set2 = "X";
+	char *ptr;
+	char *ptr2;
+	
+	printf("string untrimmed: %s\n", string); 
+
+	ptr = ft_strtrim(string, set);
+	printf("string trimmed:   %s\n", ptr);
+	
+	ptr2 = ft_strtrim(ptr, set2);
+	printf("string trimmed:   %s\n", ptr2);
+	free(ptr);
+	free(ptr2);
+	return 0;
+} */
 // static char	*ft_strrev(const char *str)
 // {
 // 	size_t	len;
@@ -134,31 +162,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 // 	ptr = ft_strcpy_trim(s1, k, ft_strlen(s1), j);
 // 	return (ptr);
 // }
-/* 
-#include <stdio.h>
-
-int main()
-{
-	// char *string = "easypeasy.com";
-	// char *set = ".com";
-	// char *set2 = "easy";
-	// char *string = "HelloHilHiHello";
-	// char *set = "Hello";
-	// char *set2 = "Hi";
-	char *string = "xXDARKxNESSXx";
-	char *set = "x";
-	char *set2 = "X";
-	char *ptr;
-	char *ptr2;
-	
-	printf("string untrimmed: %s\n", string); 
-
-	ptr = ft_strtrim(string, set);
-	printf("string trimmed:   %s\n", ptr);
-	
-	ptr2 = ft_strtrim(ptr, set2);
-	printf("string trimmed:   %s\n", ptr2);
-	free(ptr);
-	free(ptr2);
-	return 0;
-} */
