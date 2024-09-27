@@ -1,14 +1,16 @@
 NAME = libftprintf.a
 SRC_DIR = ./src/
-SRC = $(SRC_DIR)main.c
+SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c $(SRC_DIR)ft_itoa_unsigned.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+#HEADERS_PATH = ./include/
+#HEADERS = $(HEADERS_PATH)libft.h $(HEADERS_PATH)libftprintf.h
 LIBFT_PATH = ./libft/
 LIBFT =$(LIBFT_PATH)libft.a
 CC = cc
 AR = ar
 ARFLAGS = -rcs
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 
 
 all: $(NAME)
