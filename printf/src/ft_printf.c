@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:51 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:55:13 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/30 16:09:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,34 @@ static int	ft_printf_textread1(const char *string, va_list args)
 	{
 		count += ft_putstring_va(args);
 	}
-	else if (*string == '%')
+	else if (*string == '%' && *(string - 1) == '%')
 	{
-		write(1, "%%", 1);
+		write(1, "%", 1);
 		count += 1;
 	}
 	return (count);
 }
 
-static int	ft_printf_textread(const char *string, va_list args)
+static int	ft_printf_textread(const char *string, va_list args, int *i)
 {
 	int	count;
-	int	i;
 
-	i = 0;
 	count = 0;
-	while (string[i] != '\0')
+	if (string[*i] == '%')
 	{
-		if (string[i] == '%')
-		{
-			i++;
-			if (string[i] == 'c' || string[i] == 's' || string[i] == '%')
-				count += ft_printf_textread1(string + i, args);
-			if (string[i] == 'd' || string[i] == 'i' || string[i] == 'u')
-				count += ft_printf_textread2(string + i, args);
-			if (string[i] == 'x' || string[i] == 'X' || string[i] == 'p')
-				count += ft_printf_textread3(string + i, args);
-			i++;
-		}
-		write(1, (string + i), 1);
-		i++;
+		*i = 1 + *i;
+		if (string[*i] == 'c' || string[*i] == 's' || (string[*i] == '%'))
+			count += ft_printf_textread1(string + *i, args);
+		else if (string[*i] == 'd' || string[*i] == 'i' || string[*i] == 'u')
+			count += ft_printf_textread2(string + *i, args);
+		else if (string[*i] == 'x' || string[*i] == 'X' || string[*i] == 'p')
+			count += ft_printf_textread3(string + *i, args);
+		*i = 1 + *i;
+	}
+	if (string[*i] != '%')
+	{
+		write(1, (string + *i), 1);
+		*i = 1 + *i;
 		count++;
 	}
 	return (count);
@@ -105,9 +103,13 @@ int	ft_printf(const char *string, ...)
 {
 	int		count;
 	va_list	args;
+	int		i;
 
 	va_start(args, string);
-	count = ft_printf_textread(string, args);
+	i = 0;
+	count = 0;
+	while (string[i] != '\0')
+		count += ft_printf_textread(string, args, &i);
 	va_end(args);
 	return (count);
 }

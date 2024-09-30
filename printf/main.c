@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:55:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/30 15:51:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int	main(void)
 {
-	ft_printf("hey og %%d:%d %%%%: %%,%% f: \n", 1);
-	printf("hey og %%d:%d %%%%: %%,%% X: \n", 1);
+	ft_printf("hey myprint %%d:%d %%%%: %%,%%: %%X:%X \n", 1, 1225);
+	printf("hey ogprint %%d:%d %%%%: %%,%% %%X:%X \n", 1, 1225);
 	printf("\n---MY PRINTF---\n");
 	ft_printf("char %c\n", '5');
 	ft_printf("string %s\n", "hey");

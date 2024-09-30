@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:54 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:55:07 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/30 15:30:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_putstring_va(va_list args)
 
 	x = va_arg(args, char *);
 	len = ft_strlen(x);
-		write(1, x, len);
+	write(1, x, len);
 	return (len);
 }
 
