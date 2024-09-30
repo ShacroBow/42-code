@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_unsigned_va.c                              :+:      :+:    :+:   */
+/*   ft_itoa_unsigned.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:57 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/27 18:26:24 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:47:53 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	ft_intlen_itoa(unsigned int n)
 	}
 	return (i);
 }
+
 static void	ft_revstr_itoa(char *str, unsigned int size)
 {
 	int		i_start;
@@ -70,7 +71,7 @@ static char	*ft_itoacalc_itoa(char *ptr, unsigned int n)
 	return (ptr);
 }
 
-char	*ft_itoa_unsigned_va(unsigned int n)
+char	*ft_itoa_unsigned(unsigned int n)
 {
 	int		numsize;
 	char	*ptr;
@@ -82,9 +83,7 @@ char	*ft_itoa_unsigned_va(unsigned int n)
 	ptr = ft_itoacalc_itoa(ptr, n);
 	return (ptr);
 }
-
 /* #include <stdio.h>
-
 int main(void)
 {
 	unsigned int test_values[] = {0, 1, 123, 456789, 4294967295}; // Test cases

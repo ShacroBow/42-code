@@ -1,29 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
+/*   Updated: 2024/09/30 15:25:00 by kmashkoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "libft.h"
 #include "libftprintf.h"
 
-int max(int ap, ...);
-int ft_printf(const char *ap, ...);
-
-
-int main()
+int	main(void)
 {
-	max(3, 14,42,15,24);
-	printf("hey og %%d:%d %%%%: %%,%%f: %f\n", 1, 1.5);
-	// printf("%d\n",)
-	// printf("---ORIGINAL PRINTF---\n");
-	// printf("char %c\n", 42);
-	// printf("string %5s\n", "hey");
-	// printf("pointer in hex %p\n", (void *)12323);
-	// printf("decimal %+d\n", 424242);
-	// printf("int %12.10i\n", 424242);
-	// printf("unsigned %-10u\n", 424242);
-	// printf("float %10.3f ----NOT NEEDED\n", (float)424242);
-	// printf("hex %x\n", (void *)12323);
-	// printf("HEX %X\n", (void *)12323);
-	// printf("precentage %%\n");
+	ft_printf("hey og %%d:%d %%%%: %%,%% f: \n", 1);
+	printf("hey og %%d:%d %%%%: %%,%% X: \n", 1);
+	printf("\n---MY PRINTF---\n");
+	ft_printf("char %c\n", '5');
+	ft_printf("string %5s\n", "hey");
+	ft_printf("pointer in hex %p\n", (void *)12323);
+	ft_printf("decimal %+d\n", 424242);
+	ft_printf("int %12.10i\n", 424242);
+	ft_printf("unsigned %-10u\n", 424242);
+	ft_printf("hex %x\n", 12323);
+	ft_printf("HEX %X\n", 12323);
+	ft_printf("precentage %%\n");
+	printf("\n---ORIGINAL PRINTF---\n");
+	printf("char %c\n", '5');
+	printf("string %5s\n", "hey");
+	printf("pointer in hex %p\n", (void *)12323);
+	printf("decimal %+d\n", 424242);
+	printf("int %12.10i\n", 424242);
+	printf("unsigned %-10u\n", 424242);
+	printf("hex %x\n", 12323);
+	printf("HEX %X\n", 12323);
+	printf("precentage %%\n");
 }
 /* 
+	max(3, 14,42,15,24);
+
+int max(int ap, ...);
+int ft_printf(const char *ap, ...);
 int ft_printf(const char *ap, ... )
 {
 	va_list	args;
@@ -68,26 +88,24 @@ int ft_printf(const char *ap, ... )
 	va_end(args);
 	return i;
 } */
+// int max(int ap, ...)
+// {
+// 	va_list args;
+// 	int x;
+// 	int max;
 
-
-int max(int ap, ...)
-{
-	va_list args;
-	int x;
-	int max;
-
-	va_start(args, ap);
-	for(int i = 0; i<ap;i++)
-	{
-		x = va_arg(args, int);
-		if(i== 0)
-			max = x;
-		else if (x > max)
-			max = x;
-		printf("argc:%d", i);
-		printf(" =  x:%d\n", x);
-	}
-	printf("\nmax: %d\n", max);
-	va_end(args);
-	return (0);
-}
+// 	va_start(args, ap);
+// 	for(int i = 0; i<ap;i++)
+// 	{
+// 		x = va_arg(args, int);
+// 		if(i== 0)
+// 			max = x;
+// 		else if (x > max)
+// 			max = x;
+// 		printf("argc:%d", i);
+// 		printf(" =  x:%d\n", x);
+// 	}
+// 	printf("\nmax: %d\n", max);
+// 	va_end(args);
+// 	return (0);
+// }

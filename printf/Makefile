@@ -1,10 +1,10 @@
 NAME = libftprintf.a
+TESTMAIN = main.c
 SRC_DIR = ./src/
-SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c $(SRC_DIR)ft_itoa_unsigned.c
+SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c \
+	$(SRC_DIR)ft_itoa_unsigned.c $(SRC_DIR)ft_itohex.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-#HEADERS_PATH = ./include/
-#HEADERS = $(HEADERS_PATH)libft.h $(HEADERS_PATH)libftprintf.h
 LIBFT_PATH = ./libft/
 LIBFT =$(LIBFT_PATH)libft.a
 CC = cc
@@ -18,7 +18,7 @@ all: $(NAME)
 #bonus: all
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ) $(LIBFT)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJ) -l $(LIBFT)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -39,4 +39,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re #bonus
+compile: $(NAME)
+	$(CC) $(TESTMAIN) $(NAME) $(LIBFT) $(CFLAGS)
+
+.PHONY: all clean fclean re compile #bonus
