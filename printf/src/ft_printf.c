@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:51 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 15:45:24 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:55:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_printf_textread3(const char *string, va_list args)
 {

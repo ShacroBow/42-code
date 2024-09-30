@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 15:53:24 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:55:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <limits.h>
 
 int	main(void)

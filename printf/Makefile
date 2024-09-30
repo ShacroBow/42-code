@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+NAME = ft_printf.h
 TESTMAIN = main.c
 SRC_DIR = ./src/
 SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c \

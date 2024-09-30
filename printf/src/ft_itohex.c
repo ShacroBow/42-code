@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:26:28 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:40:12 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:55:02 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_intlen(size_t n)
 {
