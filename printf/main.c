@@ -6,13 +6,14 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 15:25:00 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:53:24 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 #include "libftprintf.h"
+#include <limits.h>
 
 int	main(void)
 {
@@ -20,23 +21,23 @@ int	main(void)
 	printf("hey og %%d:%d %%%%: %%,%% X: \n", 1);
 	printf("\n---MY PRINTF---\n");
 	ft_printf("char %c\n", '5');
-	ft_printf("string %5s\n", "hey");
-	ft_printf("pointer in hex %p\n", (void *)12323);
-	ft_printf("decimal %+d\n", 424242);
-	ft_printf("int %12.10i\n", 424242);
-	ft_printf("unsigned %-10u\n", 424242);
-	ft_printf("hex %x\n", 12323);
-	ft_printf("HEX %X\n", 12323);
+	ft_printf("string %s\n", "hey");
+	ft_printf("pointer in hex %p\n", (void *)1255);
+	ft_printf("decimal %d\n", INT_MAX);
+	ft_printf("int %i\n", INT_MAX);
+	ft_printf("unsigned %u\n", UINT_MAX);
+	ft_printf("hex %x\n", 1255);
+	ft_printf("HEX %X\n", 1255);
 	ft_printf("precentage %%\n");
 	printf("\n---ORIGINAL PRINTF---\n");
 	printf("char %c\n", '5');
-	printf("string %5s\n", "hey");
-	printf("pointer in hex %p\n", (void *)12323);
-	printf("decimal %+d\n", 424242);
-	printf("int %12.10i\n", 424242);
-	printf("unsigned %-10u\n", 424242);
-	printf("hex %x\n", 12323);
-	printf("HEX %X\n", 12323);
+	printf("string %s\n", "hey");
+	printf("pointer in hex %p\n", (void *)1255);
+	printf("decimal %d\n", INT_MAX);
+	printf("int %i\n", INT_MAX);
+	printf("unsigned %u\n", UINT_MAX);
+	printf("hex %x\n", 1255);
+	printf("HEX %X\n", 1255);
 	printf("precentage %%\n");
 }
 /* 

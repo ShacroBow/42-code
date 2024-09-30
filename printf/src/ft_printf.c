@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:51 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:57:26 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:45:24 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	ft_printf_textread3(const char *string, va_list args)
 	}
 	else if (*string == 'p')
 	{
-		count += ft_itohex_va(args, 0);
+		write(1, "0x", 2);
+		count += 2 + ft_itohex_va(args, 0);
 	}
 	return (count);
 }
@@ -67,7 +68,7 @@ static int	ft_printf_textread1(const char *string, va_list args)
 	}
 	else if (*string == '%')
 	{
-		write(1, (void *) '%', 1);
+		write(1, "%%", 1);
 		count += 1;
 	}
 	return (count);
@@ -91,6 +92,7 @@ static int	ft_printf_textread(const char *string, va_list args)
 				count += ft_printf_textread2(string + i, args);
 			if (string[i] == 'x' || string[i] == 'X' || string[i] == 'p')
 				count += ft_printf_textread3(string + i, args);
+			i++;
 		}
 		write(1, (string + i), 1);
 		i++;
