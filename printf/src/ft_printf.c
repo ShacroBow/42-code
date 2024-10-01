@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:51 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 16:09:27 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/01 15:47:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ static int	ft_printf_textread3(const char *string, va_list args)
 	count = 0;
 	if (*string == 'x')
 	{
-		count += ft_itohex_va(args, 0);
+		count += ft_itohex_va(args);
 	}
 	else if (*string == 'X')
 	{
-		count += ft_itohex_va(args, 0);
+		count += ft_itohex_cap_va(args);
 	}
 	else if (*string == 'p')
 	{
-		write(1, "0x", 2);
-		count += 2 + ft_itohex_va(args, 0);
+		count += 2 + ft_itohex_point_va(args);
 	}
 	return (count);
 }

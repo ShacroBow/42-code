@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   .main.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 15:51:55 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/01 18:04:29 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 
 int	main(void)
 {
+	int count = 0;
 	ft_printf("hey myprint %%d:%d %%%%: %%,%%: %%X:%X \n", 1, 1225);
 	printf("hey ogprint %%d:%d %%%%: %%,%% %%X:%X \n", 1, 1225);
 	printf("\n---MY PRINTF---\n");
 	ft_printf("char %c\n", '5');
 	ft_printf("string %s\n", "hey");
 	ft_printf("pointer in hex %p\n", (void *)1255);
-	ft_printf("decimal %d\n", INT_MAX);
-	ft_printf("int %i\n", INT_MAX);
+	ft_printf("decimal %d\n", INT_MIN);
+	ft_printf("int %i\n", INT_MIN);
 	ft_printf("unsigned %u\n", UINT_MAX);
 	ft_printf("hex %x\n", 1255);
 	ft_printf("HEX %X\n", 1255);
@@ -33,12 +34,45 @@ int	main(void)
 	printf("char %c\n", '5');
 	printf("string %s\n", "hey");
 	printf("pointer in hex %p\n", (void *)1255);
-	printf("decimal %d\n", INT_MAX);
-	printf("int %i\n", INT_MAX);
+	printf("decimal %d\n", INT_MIN);
+	printf("int %i\n", INT_MIN);
 	printf("unsigned %u\n", UINT_MAX);
 	printf("hex %x\n", 1255);
 	printf("HEX %X\n", 1255);
 	printf("precentage %%\n");
+	
+	printf("\n-----null checking.------\n");
+	
+	count = ft_printf("myprint:p %p\n",NULL);
+	ft_printf("count:p %d\n", count);
+	count = printf("Ogprint:p %p\n",NULL);
+	printf("count:P %d\n\n", count);
+
+	count = ft_printf("myprint:d %d\n",'\0');
+	ft_printf("count:d %d\n", count);
+	count = printf("Ogprint:d %d\n",'\0');
+	printf("count:d %d\n\n", count);
+	
+	char *ptr = NULL;
+	count = ft_printf("myprint:p %s\n", ptr);
+	ft_printf("count:p %d\n", count);
+	count = printf("Ogprint:p %s\n", ptr);
+	printf("count:P %d\n\n", count);
+	
+	printf("\n-----francinette checking.------\n");
+	int temp;
+	temp = ft_printf("%c\n", '0');
+	printf("%d\n", temp);
+
+	temp = printf("%c\n", '0');
+	printf("%d\n", temp);
+
+	ft_printf("wow:%c\n", '0' - 256);
+	printf("wow:%c\n", '0' - 256);
+
+	ft_printf("%s", "");
+	printf(" %s", "");
+
 }
 /* 
 	max(3, 14,42,15,24);

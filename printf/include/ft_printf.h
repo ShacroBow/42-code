@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:30 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 15:30:12 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/01 15:30:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int		ft_itoa_va(va_list args);
 int		ft_itoa_unsigned_va(va_list args);
 char	*ft_itoa_unsigned(unsigned int n);
 char	*ft_itohex(size_t n);
-int		ft_itohex_va(va_list args, int k);
+int		ft_itohex_va(va_list args);
+int		ft_itohex_cap_va(va_list args);
+int		ft_itohex_point_va(va_list args);
+int		ft_failcheck_printf(int k);
 
 #endif

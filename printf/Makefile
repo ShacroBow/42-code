@@ -1,24 +1,27 @@
 NAME = libftprintf.a
-TESTMAIN = main.c
+TESTMAIN = .main.c
 SRC_DIR = ./src/
 SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c \
-	$(SRC_DIR)ft_itoa_unsigned.c $(SRC_DIR)ft_itohex.c
+	$(SRC_DIR)ft_itoa_unsigned.c $(SRC_DIR)ft_itohex.c \
+	 $(SRC_DIR)ft_printf_utils2.c $(SRC_DIR)ft_failcheck_printf.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT_PATH = ./libft/
-LIBFT =$(LIBFT_PATH)libft.a
+LIBFT = libft.a
 CC = cc
 AR = ar
 ARFLAGS = -rcs
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -Wall -Wextra -Werror -I include
 
 
 all: $(NAME)
 
 #bonus: all
 
-$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ) -l $(LIBFT)
+$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_PATH)$(LIBFT)
+	cp $(LIBFT_PATH)$(LIBFT) ./
+	mv $(LIBFT) $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -26,7 +29,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 $(OBJ_DIR):
 	mkdir -p $@
 
-$(LIBFT):
+$(LIBFT_PATH)$(LIBFT):
 	make -C $(LIBFT_PATH) all
 
 clean:
@@ -40,6 +43,6 @@ fclean: clean
 re: fclean all
 
 compile: $(NAME)
-	$(CC) $(TESTMAIN) $(NAME) $(LIBFT) $(CFLAGS)
+	$(CC) $(TESTMAIN) $(NAME) $(CFLAGS) -g
 
 .PHONY: all clean fclean re compile #bonus
