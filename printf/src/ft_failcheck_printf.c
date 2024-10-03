@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_failcheck_printf.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 12:45:19 by codespace         #+#    #+#             */
-/*   Updated: 2024/10/03 13:22:39 by codespace        ###   ########.fr       */
+/*   Created: 2024/10/01 12:45:19 by kmashkoo          #+#    #+#             */
+/*   Updated: 2024/10/03 19:48:00 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
