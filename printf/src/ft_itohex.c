@@ -6,44 +6,44 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:26:28 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:55:02 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/03 16:31:48 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_intlen(size_t n)
+static char	*ft_sizecorrection(char *ptr)
 {
-	int	i;
+	char	*temp;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	while (n > 0)
-	{
-		n = n / 16;
-		i++;
-	}
-	return (i);
+	temp = ft_strdup(ptr);
+	free(ptr);
+	return (temp);
 }
 
-static int	ft_itohexcalc(size_t n, char *ptr, char *refrence, int *j)
+static void	ft_revstr(char *str, unsigned int size)
 {
-	int	i;
+	int		i_start;
+	int		i_end;
+	char	carry;
 
-	i = 0;
-	if (n > 0)
+	i_start = 0;
+	i_end = size - 1;
+	while (i_start < i_end)
 	{
-		i = n % 16;
-		n = n / 16;
-		ptr[*j] = refrence[i];
+		carry = str[i_start];
+		str[i_start] = str[i_end];
+		str[i_end] = carry;
+		i_start++;
+		i_end--;
 	}
-	else if (n <= 16)
-	{
-		i = n % 16;
-		ptr[*j] = refrence[i];
-	}
-	return (n);
+}
+
+static char	*ft_itohexcalc(char *ptr)
+{
+	ptr = ft_sizecorrection(ptr);
+	ft_revstr(ptr, ft_strlen(ptr));
+	return (ptr);
 }
 
 char	*ft_itohex(size_t n)
@@ -51,31 +51,33 @@ char	*ft_itohex(size_t n)
 	char	*refrence;
 	char	*ptr;
 	int		j;
+	int		i;
 
-	j = ft_intlen(n);
-	ptr = ft_calloc(j + 1, sizeof(char));
+	j = 0;
+	i = 0;
+	ptr = ft_calloc(20 + 1, sizeof(char));
 	if (!ptr)
 		return (NULL);
-	ptr[j--] = '\0';
 	refrence = "0123456789abcdef";
 	if (n == 0)
+		ptr[0] = refrence[0];
+	while (n > 0)
 	{
-		ft_itohexcalc(n, ptr, refrence, &j);
+		i = n % 16;
+		n = n / 16;
+		ptr[j] = refrence[i];
+		j++;
 	}
-	while (j >= 0)
-	{
-		n = ft_itohexcalc(n, ptr, refrence, &j);
-		j--;
-	}
-	return (ptr);
+	return (ft_itohexcalc(ptr));
 }
 /* 
 #include <stdio.h>
+#include <limits.h>
 
 int main(void)
 {
 	size_t test_values[] = {0, 1, 16, 15, 241, 255, \
-	 65535, 1048575, 4294967295};
+	 65535, ULONG_MAX, ULLONG_MAX};
 	size_t num_tests = sizeof(test_values) / sizeof(test_values[0]);
 	char *hex_string;
 
@@ -93,6 +95,18 @@ int main(void)
 			printf("Failed to convert %zu to hexadecimal.\n", test_values[i]);
 		}
 	}
+	printf("\n");
+	char *ptr;
+	char *test = "heyogfdgfdg";
 
+	ptr = ft_itohex((unsigned long)test);
+	if (!ptr)
+		return (ft_failcheck_printf(1));
+	ft_putstring("0x");
+	ft_putstring(ptr);
+	free(ptr);
+	printf("\n");
+	ft_printf("%p\n", test);
+	printf("%p\n", test);
 	return 0;
 } */

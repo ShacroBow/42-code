@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/10/01 18:04:29 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/03 17:09:36 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@
 int	main(void)
 {
 	int count = 0;
-	ft_printf("hey myprint %%d:%d %%%%: %%,%%: %%X:%X \n", 1, 1225);
-	printf("hey ogprint %%d:%d %%%%: %%,%% %%X:%X \n", 1, 1225);
+	ft_printf("\nhey myprint %%d:%d %%%%: %%,%%: %%X:%X \n", 1, 1225);
+	printf("\nhey ogprint %%d:%d %%%%: %%,%% %%X:%X \n", 1, 1225);
 	printf("\n---MY PRINTF---\n");
 	ft_printf("char %c\n", '5');
 	ft_printf("string %s\n", "hey");
-	ft_printf("pointer in hex %p\n", (void *)1255);
+	ft_printf("pointer in hex %p\n", (void *)ULONG_MAX);
 	ft_printf("decimal %d\n", INT_MIN);
 	ft_printf("int %i\n", INT_MIN);
 	ft_printf("unsigned %u\n", UINT_MAX);
-	ft_printf("hex %x\n", 1255);
+	ft_printf("hex %x\n", ULONG_MAX);
 	ft_printf("HEX %X\n", 1255);
 	ft_printf("precentage %%\n");
 	printf("\n---ORIGINAL PRINTF---\n");
 	printf("char %c\n", '5');
 	printf("string %s\n", "hey");
-	printf("pointer in hex %p\n", (void *)1255);
+	printf("pointer in hex %p\n", (void *)ULONG_MAX);
 	printf("decimal %d\n", INT_MIN);
 	printf("int %i\n", INT_MIN);
 	printf("unsigned %u\n", UINT_MAX);
-	printf("hex %x\n", 1255);
+	printf("hex %x\n", UINT_MAX);
 	printf("HEX %X\n", 1255);
 	printf("precentage %%\n");
 	
@@ -47,6 +47,14 @@ int	main(void)
 	ft_printf("count:p %d\n", count);
 	count = printf("Ogprint:p %p\n",NULL);
 	printf("count:P %d\n\n", count);
+	
+	char *s1 = " HEYOOO";
+	count = ft_printf("myprint:p %p\n", s1);
+	ft_printf("count:p %d\n", count);
+	count = printf("Ogprint:p %p\n", s1);
+	printf("count:P %d\n\n", count);
+	count = printf("Ogprint:p %p\n", s1);
+	printf("count:P %d\n\n", count);
 
 	count = ft_printf("myprint:d %d\n",'\0');
 	ft_printf("count:d %d\n", count);
@@ -54,28 +62,58 @@ int	main(void)
 	printf("count:d %d\n\n", count);
 	
 	char *ptr = NULL;
-	count = ft_printf("myprint:p %s\n", ptr);
-	ft_printf("count:p %d\n", count);
-	count = printf("Ogprint:p %s\n", ptr);
-	printf("count:P %d\n\n", count);
+	count = ft_printf("myprint:s %s\n", ptr);
+	ft_printf("count:s %d\n", count);
+	count = printf("Ogprint:s %s\n", ptr);
+	printf("count:s %d\n\n", count);
 	
 	printf("\n-----francinette checking.------\n");
 	int temp;
+	printf("\n");
 	temp = ft_printf("%c\n", '0');
+	printf("\n");
 	printf("%d\n", temp);
 
+	printf("\n");
 	temp = printf("%c\n", '0');
+	printf("\n");
 	printf("%d\n", temp);
+	printf("\n");
 
 	ft_printf("wow:%c\n", '0' - 256);
 	printf("wow:%c\n", '0' - 256);
 
-	ft_printf("%s", "");
-	printf(" %s", "");
 
+	// printf("\n");
+	// ft_printf("%s", "");
+	printf("\n");	
+	printf(" %s", "");
+	printf("\n");
+	
+	printf("\n-----Odd testing.------\n");
+	char *s2 = "hey buddy";
+	printf("\n");
+	ft_printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
+	printf("\n");
+	ft_printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
+	printf("\n");
+	ft_printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
+	printf("\n");
+	printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
+	printf("\n");
+	
+	
+	
+	temp = ft_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+	printf("\n%d\n", temp);
+	temp = printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+
+	printf("\n%d\n", temp);
+	
 }
 /* 
-	max(3, 14,42,15,24);
+write all the code as a in paramater va_arg
+max(3, 14,42,15,24);
 
 int max(int ap, ...);
 int ft_printf(const char *ap, ...);

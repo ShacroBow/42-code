@@ -6,66 +6,56 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:54 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/10/01 15:47:12 by codespace        ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2024/10/03 13:20:36 by codespace        ###   ########.fr       */
+/*                                                                           */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar_va(va_list args)
+int	ft_putchar(char x)
 {
-	char	x;
-
-	x = (char )va_arg(args, int);
 	write(1, &x, 1);
 	return (1);
 }
 
-int	ft_putstring_va(va_list args)
+int	ft_putstring(char *x)
 {
-	char	*x;
-	int		len;
+	int	count;
 
-	x = va_arg(args, char *);
-	if (!x)
+	count = 0;
+	if (x == NULL)
 		return (ft_failcheck_printf(0));
-	len = ft_strlen(x);
-	write(1, x, len);
-	return (len);
+	while (x[count] != '\0')
+	{
+		count += ft_putchar(x[count]);
+	}
+	return (count);
 }
 
-int	ft_itoa_va(va_list args)
+int	ft_itoa_signed(int x)
 {
-	int		x;
 	char	*ptr;
-	int		len;
+	int		count;
 
-	x = va_arg(args, int);
+	count = 0;
 	ptr = ft_itoa(x);
-	len = ft_strlen(ptr);
 	if (!ptr)
-	{
-		return (-1);
-	}
-	write(1, ptr, len);
+		return (0);
+	count += ft_putstring(ptr);
 	free(ptr);
-	return (len);
+	return (count);
 }
 
-int	ft_itoa_unsigned_va(va_list args)
+int	ft_uitoa_unsigned(unsigned int x)
 {
-	unsigned int	x;
 	char			*ptr;
-	int				len;
+	int				count;
 
-	x = va_arg(args, unsigned int);
-	ptr = ft_itoa_unsigned(x);
-	len = ft_strlen(ptr);
+	count = 0;
+	ptr = ft_uitoa(x);
 	if (!ptr)
-	{
-		return (-1);
-	}
-	write(1, ptr, len);
+		return (0);
+	count += ft_putstring(ptr);
 	free(ptr);
-	return (len);
+	return (count);
 }

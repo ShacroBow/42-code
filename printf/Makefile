@@ -2,7 +2,7 @@ NAME = libftprintf.a
 TESTMAIN = .main.c
 SRC_DIR = ./src/
 SRC = $(SRC_DIR)ft_printf.c $(SRC_DIR)ft_printf_utils.c \
-	$(SRC_DIR)ft_itoa_unsigned.c $(SRC_DIR)ft_itohex.c \
+	$(SRC_DIR)ft_uitoa.c $(SRC_DIR)ft_itohex.c \
 	 $(SRC_DIR)ft_printf_utils2.c $(SRC_DIR)ft_failcheck_printf.c
 OBJ_DIR = ./obj/
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

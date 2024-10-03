@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_unsigned.c                                 :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:57 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/30 14:54:52 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/03 16:56:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*ft_itoacalc_itoa(char *ptr, unsigned int n)
 	return (ptr);
 }
 
-char	*ft_itoa_unsigned(unsigned int n)
+char	*ft_uitoa(unsigned int n)
 {
 	int		numsize;
 	char	*ptr;
