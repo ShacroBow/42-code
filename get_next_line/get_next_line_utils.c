@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr_getnxtlin(const char *s, int c)
 {
 	int		i;
 	char	*ptr;
@@ -53,8 +53,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > str_len - start)
 		len = str_len - start;
-	ptr = malloc(sizeof(*s) * (len + 1));
-	if (!ptr)
+	ptr = ft_calloc(len + 1, sizeof(char));
+	if (!ptr) 
 		return (NULL);
 	i = 0;
 	while (i < len && s[start + i])
@@ -109,20 +109,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	int		i;
 	int		j;
-	size_t	size;
 
 	if (!s1 || !s2)
 		return (NULL);
-	j = -1;
-	i = -1;
-	size = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)ft_calloc(size + 1, sizeof(char));
+	j = 0;
+	i = 0;
+	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
-	while (s1[++i])
+	while (s1[i])
+	{
 		str[i] = s1[i];
-	while (s2[++j])
+		i++;
+	}
+	while (s2[j])
+	{
 		str[i + j] = s2[j];
+		j++;
+	}
 	return (str);
 }
 
