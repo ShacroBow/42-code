@@ -29,6 +29,8 @@ int	ft_strchr_getnxtlin(const char *s, int c)
 
 	i = 0;
 	ptr = (char *)s;
+	if (s == NULL)
+		return (-1);
 	while (ptr[i] != '\0')
 	{
 		if (ptr[i] == (unsigned char)c)
@@ -50,7 +52,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	str_len = ft_strlen(s);
 	if (start >= str_len)
-		return (ft_strdup(""));
+		return (ft_calloc(1, 1));
 	if (len > str_len - start)
 		len = str_len - start;
 	ptr = ft_calloc(len + 1, sizeof(char));
@@ -83,25 +85,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size > 0)
 		dst[i] = '\0';
 	return (len_src);
-}
-
-char	*ft_strdup(const char *str)
-{
-	size_t	i;
-	size_t	len;
-	char	*ptr;
-
-	i = 0;
-	len = ft_strlen(str);
-	ptr = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (i < len)
-	{
-		ptr[i] = str[i];
-		i++;
-	}
-	return (ptr);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

@@ -12,79 +12,86 @@
 
 #include "get_next_line.h"
 
-static void	free_null(char **ptr)
+static void	ft_nullit(void *ptr)
 {
-	if (*ptr != NULL)
+	if (ptr != NULL)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		free(ptr);
+		ptr = NULL;
 	}
 }
 
-static char	*ft_lefttrim(int nl_offset, char **buffer)
+static char	*ft_lefttrim(int readlen, t_fdstate **fdstate, int fd)
 {
 	char	*ptr;
 	char	*tmp;
 
 	tmp = NULL;
-	if (nl_offset <= 0 )
+	if (readlen <= 0 )
 	{
-		if (**buffer == '\0')
+		if (fdstate[fd]->buf == NULL)
 		{
-			free(*buffer);
-			buffer = NULL;
+			ft_nullit(fdstate[fd]->buf);
+			ft_nullit(fdstate[fd]);
 			return (NULL);
 		}
-		ptr = *buffer;
-		*buffer = NULL;
+		ptr = fdstate[fd]->buf;
+		fdstate[fd]->buf = NULL;
 		return (ptr);
 	}
-	tmp = ft_substr(*buffer, nl_offset, BUFFER_SIZE);
-	ptr = *buffer;
-	ptr[nl_offset] = '\0';
-	*buffer = tmp;
+	tmp = ft_substr(fdstate[fd]->buf, readlen, BUFFER_SIZE);
+	ptr = fdstate[fd]->buf;
+	ptr[readlen] = '\0';
+	fdstate[fd]->buf = tmp;
 	return (ptr);
 }
 
-static char	*ft_nextline(int fd, char **buffer, char *readbuffer)
+static char	*ft_nextline(int fd, t_fdstate **fdstate, char *readbuffer)
 {
 	size_t	readlen;
-	int		nl_offset;
 	char	*ptr;
 
-	nl_offset = ft_strchr_getnxtlin(buffer[fd], '\n');
+	fdstate[fd]->nl_offset = ft_strchr_getnxtlin(fdstate[fd]->buf, '\n');
 	ptr = NULL;
 	readlen = 0;
-	while (nl_offset == -1)
+	while (fdstate[fd]->nl_offset == (size_t)-1)
 	{
 		readlen = read(fd, readbuffer, BUFFER_SIZE);
-		if (readlen <= 0)
-			return (ft_lefttrim(readlen, &buffer[fd]));
+		if (readlen == (size_t)EOF || readlen == 0)
+			return (ft_lefttrim(readlen, fdstate, fd));
 		readbuffer[readlen] = '\0';
-		ptr = ft_strjoin(buffer[fd], readbuffer);
+		ptr = ft_strjoin(fdstate[fd]->buf, readbuffer);
 		if (!ptr)
 			return (NULL);
-		free_null(&buffer[fd]);
-		buffer[fd] = ptr;
-		nl_offset = ft_strchr_getnxtlin(buffer[fd], '\n');
+		ft_nullit(fdstate[fd]->buf);
+		fdstate[fd]->buf = ptr;
+		fdstate[fd]->nl_offset = ft_strchr_getnxtlin(fdstate[fd]->buf, '\n');
 	}
-	return (ft_lefttrim(nl_offset + 1, &buffer[fd]));
+	return (ft_lefttrim(fdstate[fd]->nl_offset + 1, fdstate, fd));
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[FDBUFFER + 1] = {0};
-	char		*readbuffer;
-	char		*ptr;
+	static t_fdstate	*fdstate[FDBUFFER + 1] = {0};
+	char				*readbuffer;
+	char				*ptr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FDBUFFER)
 		return (NULL);
-	if (buffer[fd] == NULL)
-		buffer[fd] = ft_strdup("");
+	if (fdstate[fd] == NULL)
+	{
+		fdstate[fd] = (t_fdstate *)ft_calloc(1, sizeof(t_fdstate));
+		if (!fdstate[fd])
+			return (NULL);
+		fdstate[fd]->buf = (char *)ft_calloc(1, 1);
+		if (!fdstate[fd]->buf)
+			return (NULL);
+		fdstate[fd]->nl_offset = 0;
+	}
 	readbuffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (readbuffer == NULL)
+	if (!readbuffer)
 		return (NULL);
-	ptr = ft_nextline(fd, buffer, readbuffer);
-	free_null(&readbuffer);
+	ptr = ft_nextline(fd, fdstate, readbuffer);
+	ft_nullit(readbuffer);
 	return (ptr);
 }
