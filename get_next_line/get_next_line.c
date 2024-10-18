@@ -21,13 +21,11 @@ static void	ft_nullit(void *ptr)
 	}
 }
 
-static char	*ft_lefttrim(int readlen, t_fdstate **fdstate, int fd)
+static char	*ft_error_return(int readlen, t_fdstate **fdstate, int fd)
 {
 	char	*ptr;
-	char	*tmp;
 
-	tmp = NULL;
-	if (readlen <= 0 )
+	if (readlen <= 0)
 	{
 		if (fdstate[fd]->buf == NULL)
 		{
@@ -39,9 +37,18 @@ static char	*ft_lefttrim(int readlen, t_fdstate **fdstate, int fd)
 		fdstate[fd]->buf = NULL;
 		return (ptr);
 	}
-	tmp = ft_substr(fdstate[fd]->buf, readlen, BUFFER_SIZE);
+	return (NULL);
+}
+
+static char	*ft_lefttrim(t_fdstate **fdstate, int fd)
+{
+	char	*ptr;
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = ft_substr(fdstate[fd]->buf, fdstate[fd]->nl_offset + 1, BUFFER_SIZE);
 	ptr = fdstate[fd]->buf;
-	ptr[readlen] = '\0';
+	ptr[fdstate[fd]->nl_offset + 1] = '\0';
 	fdstate[fd]->buf = tmp;
 	return (ptr);
 }
@@ -57,8 +64,8 @@ static char	*ft_nextline(int fd, t_fdstate **fdstate, char *readbuffer)
 	while (fdstate[fd]->nl_offset == (size_t)-1)
 	{
 		readlen = read(fd, readbuffer, BUFFER_SIZE);
-		if (readlen == (size_t)EOF || readlen == 0)
-			return (ft_lefttrim(readlen, fdstate, fd));
+		if (readlen <= 0)
+			return (ft_error_return(readlen, fdstate, fd));
 		readbuffer[readlen] = '\0';
 		ptr = ft_strjoin(fdstate[fd]->buf, readbuffer);
 		if (!ptr)
@@ -67,7 +74,7 @@ static char	*ft_nextline(int fd, t_fdstate **fdstate, char *readbuffer)
 		fdstate[fd]->buf = ptr;
 		fdstate[fd]->nl_offset = ft_strchr_getnxtlin(fdstate[fd]->buf, '\n');
 	}
-	return (ft_lefttrim(fdstate[fd]->nl_offset + 1, fdstate, fd));
+	return (ft_lefttrim(fdstate, fd));
 }
 
 char	*get_next_line(int fd)

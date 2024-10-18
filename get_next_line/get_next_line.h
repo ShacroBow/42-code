@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef GET_NEST_LINE_H
-# define GET_NEST_LINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -23,7 +22,7 @@
 #  define FDBUFFER 1024
 # endif
 
-typedef struct	s_fdstate
+typedef struct s_fdstate
 {
 	size_t	nl_offset;
 	char	*buf;
