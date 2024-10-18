@@ -27,7 +27,7 @@ static char	*ft_error_return(int readlen, t_fdstate **fdstate, int fd)
 
 	if (readlen <= 0)
 	{
-		if (fdstate[fd]->buf == NULL)
+		if (fdstate[fd]->buf[0] == '\0')
 		{
 			ft_nullit(fdstate[fd]->buf);
 			ft_nullit(fdstate[fd]);
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 		fdstate[fd] = (t_fdstate *)ft_calloc(1, sizeof(t_fdstate));
 		if (!fdstate[fd])
 			return (NULL);
-		fdstate[fd]->buf = (char *)ft_calloc(1, 1);
+		fdstate[fd]->buf = (char *)ft_calloc(1, sizeof(char));
 		if (!fdstate[fd]->buf)
 			return (NULL);
 		fdstate[fd]->nl_offset = 0;

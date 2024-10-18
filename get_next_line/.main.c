@@ -19,7 +19,10 @@ int main(void)
 		printf("line printed: %s", line);
 		free(line);
 	}
-
+	if (!line)
+	{
+		printf("\nover: %s\n", line);
+	}
 	close(fd);
 	return 0;
 }
