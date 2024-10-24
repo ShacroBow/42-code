@@ -12,7 +12,19 @@
 
 #include "get_next_line.h"
 
-int	ft_strchr_getnxtlin(const char *s, int c)
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*ptr;
@@ -20,16 +32,16 @@ int	ft_strchr_getnxtlin(const char *s, int c)
 	i = 0;
 	ptr = (char *)s;
 	if (s == NULL)
-		return (-1);
+		return (NULL);
 	while (ptr[i] != '\0')
 	{
 		if (ptr[i] == (unsigned char)c)
-			return (i);
+			return (ptr + i);
 		i++;
 	}
 	if ((unsigned char)c == '\0')
-		return (i);
-	return (-1);
+		return (ptr + i);
+	return (NULL);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -60,27 +72,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (ptr);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	len_src;
-	size_t	i;
-
-	len_src = 0;
-	while (src[len_src] != '\0')
-		len_src++;
-	if (size == 0)
-		return (len_src);
-	i = 0;
-	while (i < size - 1 && src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	if (size > 0)
-		dst[i] = '\0';
-	return (len_src);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -89,10 +80,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
+	j = 0;
 	i = 0;
 	while (s1[i])
 		i++;
-	j = 0;
 	while (s2[j])
 		j++;
 	str = (char *)ft_calloc(j + i + 1, sizeof(char));

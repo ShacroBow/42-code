@@ -6,7 +6,7 @@
 
 int main(void)
 {
-	int fd = open("text.txt", O_RDONLY);
+	int fd = open("files/alternate_line_nl_no_nl", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error opening file");
@@ -14,10 +14,12 @@ int main(void)
 	}
 
 	char *line;
+	int i=0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("line printed: %s", line);
+		printf("line %d printed: %s",i, line);
 		free(line);
+		i++;
 	}
 	if (!line)
 	{
