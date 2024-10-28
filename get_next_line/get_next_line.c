@@ -59,8 +59,11 @@ static void	ft_stitch_to_nextline(char **fdbuf, int fd, char *readbuffer)
 	if (fdbuf[fd] == NULL)
 	{
 		ptr = ft_calloc(1, 1);
-		fdbuf[fd] = ft_strjoin(ptr, readbuffer);
-		free(ptr);
+		if (ptr)
+		{
+			fdbuf[fd] = ft_strjoin(ptr, readbuffer);
+			free(ptr);
+		}
 	}
 	else
 	{
