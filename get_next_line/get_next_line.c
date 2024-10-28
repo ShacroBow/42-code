@@ -92,7 +92,7 @@ static char	*ft_nextline(int fd, char **fdbuf, char **readbuffer)
 		nl_offset = ft_strchr(fdbuf[fd], '\n');
 		if (nl_offset == NULL && readlen == 0)
 		{
-			if (fdbuf[fd][0] == '\0')
+			if (fdbuf[fd] && fdbuf[fd][0] == '\0')
 				return (ft_error_return(readlen, fdbuf, fd));
 			ptr = fdbuf[fd];
 			fdbuf[fd] = NULL;
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 	char		*readbuffer;
 	char		*ptr;
 
-	if (fd < 0 || (BUFFER_SIZE <= 0 || BUFFER_SIZE <= 0) || fd > FDBUFFER)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FDBUFFER)
 		return (NULL);
 	readbuffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!readbuffer)
