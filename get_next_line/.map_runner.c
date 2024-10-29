@@ -10,7 +10,7 @@
 
 #define MAP_WIDTH 11
 #define MAP_HEIGHT 10
-#define MAP_NAME "map1.txt"
+#define MAP_NAME ".map1.txt"
 
 static struct termios old_termios, new_termios;
 

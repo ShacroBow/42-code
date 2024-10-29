@@ -1,4 +1,4 @@
-SRC = get_next_line.c get_next_line_utils.c get_next_line.h map_runner.c #replace map_runner with main.c to run its tests.
+SRC = get_next_line.c get_next_line_utils.c get_next_line.h .map_runner.c #replace map_runner with main.c to run its tests.
 CFLAGS = -Wextra -Wall -Werror -g
 SRC_bonus = get_next_line_bonus.c get_next_line_utils_bonus.c get_next_line_bonus.h .main.c
 all: $(SRC)
