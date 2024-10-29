@@ -12,13 +12,17 @@
 
 #include "get_next_line.h"
 
-static char	*ft_error_return(int readlen, char **fdbuf, int fd)
+static char	*ft_error_return(int readlen, char **fdbuf, int fd,
+							char **readbuffer)
 {
 	if (readlen == -1)
 	{
 		if (fdbuf[fd])
 			free(fdbuf[fd]);
+		if (*readbuffer != NULL)
+			free(*readbuffer);
 		fdbuf[fd] = NULL;
+		*readbuffer = NULL;
 		return (NULL);
 	}
 	if (readlen == 0 && fdbuf[fd] != NULL)
@@ -30,26 +34,17 @@ static char	*ft_error_return(int readlen, char **fdbuf, int fd)
 	return (NULL);
 }
 
-static char	*ft_lefttrim(size_t nl_offset, char **fdbuf, int fd)
+static char	*ft_lefttrim(size_t nl_offset, char **fdbuf, int fd,
+						char **readbuffer)
 {
 	char	*ptr;
 	char	*ptr2;
-	int		i;
 
 	ptr = ft_substr(fdbuf[fd], nl_offset, ft_strlen(fdbuf[fd]) - nl_offset);
 	if (!ptr)
-		return (ft_error_return(-1, fdbuf, fd));
+		return (ft_error_return(-1, fdbuf, fd, readbuffer));
 	fdbuf[fd][nl_offset] = 0;
-	ptr2 = (char *)ft_calloc(ft_strlen(fdbuf[fd]) + 1, sizeof(char));
-	if (!ptr2)
-		return (ft_error_return(-1, fdbuf, fd));
-	i = 0;
-	while (fdbuf[fd][i] != '\0')
-	{
-		ptr2[i] = fdbuf[fd][i];
-		i++;
-	}
-	free(fdbuf[fd]);
+	ptr2 = fdbuf[fd];
 	fdbuf[fd] = ptr;
 	return (ptr2);
 }
@@ -61,11 +56,9 @@ static char	*ft_stitch_to_nextline(char **fdbuf, int fd, char **readbuffer)
 
 	if (fdbuf[fd] == NULL)
 	{
-		ptr = ft_calloc(1, 1);
-		if (!ptr)
-			return (ft_error_return(-1, fdbuf, fd));
-		fdbuf[fd] = ft_strjoin(ptr, *readbuffer);
-		free(ptr);
+		fdbuf[fd] = ft_strjoin("", *readbuffer);
+		if (!fdbuf[fd])
+			return (ft_error_return(-1, fdbuf, fd, readbuffer));
 	}
 	else
 	{
@@ -94,21 +87,22 @@ static char	*ft_nextline(int fd, char **fdbuf, char **readbuffer)
 	{
 		readlen = read(fd, *readbuffer, BUFFER_SIZE);
 		if (readlen < 0)
-			return (ft_error_return(readlen, fdbuf, fd));
+			return (ft_error_return(readlen, fdbuf, fd, readbuffer));
 		fdbuf[fd] = ft_stitch_to_nextline(fdbuf, fd, readbuffer);
 		if (!fdbuf[fd])
-			return (ft_error_return(-1, fdbuf, fd));
+			return (ft_error_return(-1, fdbuf, fd, readbuffer));
 		nl_offset = ft_strchr(fdbuf[fd], '\n');
 		if (nl_offset == NULL && readlen == 0)
 		{
 			if (fdbuf[fd] && fdbuf[fd][0] == '\0')
-				return (ft_error_return(readlen, fdbuf, fd));
-			ptr = fdbuf[fd];
+				return (ft_error_return(readlen, fdbuf, fd, readbuffer));
+			ptr = ft_strjoin("", fdbuf[fd]);
+			free(fdbuf);
 			fdbuf[fd] = NULL;
 			return (ptr);
 		}
 	}
-	return (ft_lefttrim((nl_offset - fdbuf[fd]) + 1, fdbuf, fd));
+	return (ft_lefttrim((nl_offset - fdbuf[fd]) + 1, fdbuf, fd, readbuffer));
 }
 
 char	*get_next_line(int fd)
@@ -117,11 +111,12 @@ char	*get_next_line(int fd)
 	char		*readbuffer;
 	char		*ptr;
 
+	readbuffer = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FDBUFFER)
-		return (ft_error_return(-1, fdbuf, FDBUFFER));
+		return (ft_error_return(0, fdbuf, FDBUFFER, &readbuffer));
 	readbuffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!readbuffer)
-		return (ft_error_return(-1, fdbuf, fd));
+		return (ft_error_return(-1, fdbuf, fd, &readbuffer));
 	ptr = ft_nextline(fd, fdbuf, &readbuffer);
 	if (readbuffer)
 	{
