@@ -9,7 +9,7 @@ int main(void)
 	// int fd = open("files/alternate_line_nl_no_nl", O_RDONLY);
 	// int fd = open("files/alternate_line_nl_with_nl", O_RDONLY);
 	// int fd = open("files/43_no_nl", O_RDONLY);
-	// int fd = open("files/multiple_nlx5", O_RDONLY);
+	// int fd = open("files/multiple_nl.txt", O_RDONLY);
 	int fd = open("text.txt", O_RDONLY);
 	if (fd < 0)
 	{
