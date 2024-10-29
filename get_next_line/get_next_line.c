@@ -34,14 +34,22 @@ static char	*ft_lefttrim(size_t nl_offset, char **fdbuf, int fd)
 {
 	char	*ptr;
 	char	*ptr2;
+	int		i;
 
 	ptr = ft_substr(fdbuf[fd], nl_offset, ft_strlen(fdbuf[fd]) - nl_offset);
 	if (!ptr)
 		return (ft_error_return(-1, fdbuf, fd));
-	ptr2 = ft_substr(fdbuf[fd], 0, nl_offset);
+	fdbuf[fd][nl_offset] = 0;
+	ptr2 = (char *)ft_calloc(ft_strlen(fdbuf[fd]) + 1, sizeof(char));
 	if (!ptr2)
 		return (ft_error_return(-1, fdbuf, fd));
-	ft_error_return(0, fdbuf, fd);
+	i = 0;
+	while (fdbuf[fd][i] != '\0')
+	{
+		ptr2[i] = fdbuf[fd][i];
+		i++;
+	}
+	free(fdbuf[fd]);
 	fdbuf[fd] = ptr;
 	return (ptr2);
 }
@@ -77,7 +85,7 @@ static char	*ft_stitch_to_nextline(char **fdbuf, int fd, char **readbuffer)
 
 static char	*ft_nextline(int fd, char **fdbuf, char **readbuffer)
 {
-	size_t		readlen;
+	int			readlen;
 	char		*nl_offset;
 	char		*ptr;
 
