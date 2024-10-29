@@ -54,10 +54,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	str_len = ft_strlen(s);
 	if (start >= str_len)
-	{
-		ptr = ft_calloc(1, 1);
-		return (ptr);
-	}
+		return (ft_calloc(1, 1));
 	if (len > str_len - start)
 		len = str_len - start;
 	ptr = ft_calloc(len + 1, sizeof(char));

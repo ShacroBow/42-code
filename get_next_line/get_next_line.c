@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static char	*ft_error_return(long int readlen, char **fdbuf, int fd)
+static char	*ft_error_return(int readlen, char **fdbuf, int fd)
 {
 	if (readlen == -1)
 	{
@@ -37,9 +37,11 @@ static char	*ft_lefttrim(size_t nl_offset, char **fdbuf, int fd)
 
 	ptr = ft_substr(fdbuf[fd], nl_offset, ft_strlen(fdbuf[fd]) - nl_offset);
 	if (!ptr)
-		return (ft_error_return(0, fdbuf, fd));
-	ptr2 = fdbuf[fd];
-	ptr2[nl_offset] = 0;
+		return (ft_error_return(-1, fdbuf, fd));
+	ptr2 = ft_substr(fdbuf[fd], 0, nl_offset);
+	if (!ptr2)
+		return (ft_error_return(-1, fdbuf, fd));
+	ft_error_return(0, fdbuf, fd);
 	fdbuf[fd] = ptr;
 	return (ptr2);
 }
@@ -75,7 +77,7 @@ static char	*ft_stitch_to_nextline(char **fdbuf, int fd, char **readbuffer)
 
 static char	*ft_nextline(int fd, char **fdbuf, char **readbuffer)
 {
-	long int	readlen;
+	size_t		readlen;
 	char		*nl_offset;
 	char		*ptr;
 
