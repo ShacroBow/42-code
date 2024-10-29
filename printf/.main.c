@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   .main.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:33:32 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/10/03 19:50:18 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:07:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main(void)
 {
-	int count = 0;
+	int count = 0;//hey
 	ft_printf("\nhey myprint %%d:%d %%%%: %%,%%: %%X:%X \n", 1, 1225);
 	printf("\nhey ogprint %%d:%d %%%%: %%,%% %%X:%X \n", 1, 1225);
 	printf("\n---MY PRINTF---\n");
