@@ -97,8 +97,7 @@ static char	*ft_nextline(int fd, char **fdbuf, char **readbuffer)
 			if (fdbuf[fd] && fdbuf[fd][0] == '\0')
 				return (ft_error_return(readlen, fdbuf, fd, readbuffer));
 			ptr = ft_strjoin("", fdbuf[fd]);
-			free(fdbuf);
-			fdbuf[fd] = NULL;
+			ft_error_return(0, fdbuf, fd, readbuffer);
 			return (ptr);
 		}
 	}
