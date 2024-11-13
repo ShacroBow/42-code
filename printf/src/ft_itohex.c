@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:26:28 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/11/13 14:01:52 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:59:35 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*ft_sizecorrection(char *ptr)
 	char	*temp;
 
 	temp = ft_strdup(ptr);
+	if (!temp)
+		return (NULL);
 	free(ptr);
 	return (temp);
 }
@@ -42,6 +44,8 @@ static void	ft_revstr(char *str, unsigned int size)
 static char	*ft_itohexcalc(char *ptr)
 {
 	ptr = ft_sizecorrection(ptr);
+	if (!ptr)
+		return (NULL);
 	ft_revstr(ptr, ft_strlen(ptr));
 	return (ptr);
 }
