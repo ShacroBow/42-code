@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:26:43 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/10/03 19:49:47 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:59:43 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	ft_itohex_cap(unsigned int x)
 
 	i = 0;
 	ptr = ft_itohex(x);
-	len = ft_strlen(ptr);
 	if (!ptr)
 		return (0);
+	len = ft_strlen(ptr);
 	while (ptr[i])
 	{
 		ptr[i] = ft_toupper(ptr[i]);
@@ -55,9 +55,7 @@ int	ft_itohex_point(unsigned long int x)
 	ptr = NULL;
 	count = 0;
 	if (!x)
-	{
 		return (2 + ft_failcheck_printf(1));
-	}
 	ptr = ft_itohex(x);
 	if (!ptr)
 		return (2 + ft_failcheck_printf(1));
