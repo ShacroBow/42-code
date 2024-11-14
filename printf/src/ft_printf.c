@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:25:51 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/10/03 19:50:10 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:33:27 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	ft_printf(const char *string, ...)
 	int		count;
 	va_list	args;
 	int		i;
-
+	
+	if (!string)
+		return (-1);
 	va_start(args, string);
 	i = 0;
 	count = 0;

@@ -6,10 +6,8 @@
 
 //hey
 int main() {
-	char *s2 = "hey buddy";
+	printf("%d",printf(NULL));
 	printf("\n");
-	ft_printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
-	printf("\n");
-	printf(" %s %s %s %s %s", " - ", "", "4", "", s2);
+	printf("%d",ft_printf(NULL));
 	return 0;
 }
