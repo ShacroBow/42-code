@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 11:45:06 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/09/11 19:15:51 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:29:07 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define LIBFT_H
 # include <stdlib.h>
 
+/* custom function i wrote in free time * 4.
+ft_isspace
+ft_quicksort
+ft_waste_time
+ft_realloc */
 typedef struct s_list
 {
 	void			*content;
@@ -63,4 +68,15 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+/* checks with if statement (c >= 9 && c <= 13) || (c == ' ') */
+int		ft_isspace(int c);
+/*ft_waste_time. returns amount of operations done.
+1 iteration is loosely close to 1 second of computation.*/
+long	ft_waste_time(unsigned int iterations);
+/* ft_quicksort. return sorted array or null on fail.*/
+int		*ft_quicksort(int *arr, int len);
+/* resizes malloc-ed memory. undefined behaviour for improper 
+input even if its protected internally anyways. 
+passing ptr as null will give a malloc of new_size*/
+void	*ft_realloc(void *ptr, size_t new_size);
 #endif
