@@ -75,8 +75,6 @@ int		ft_isspace(int c);
 long	ft_waste_time(unsigned int iterations);
 /* ft_quicksort. return sorted array or null on fail.*/
 int		*ft_quicksort(int *arr, int len);
-/* resizes malloc-ed memory. undefined behaviour for improper 
-input even if its protected internally anyways. 
-passing ptr as null will give a malloc of new_size*/
-void	*ft_realloc(void *ptr, size_t new_size);
+/*passing ptr as null will give a malloc of new_size*/
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size, size_t type);
 #endif

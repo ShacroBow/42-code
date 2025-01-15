@@ -43,7 +43,7 @@ int	*ft_radixposition(int *buf, int len)
 		return (NULL);
 	sorted = (int *)ft_calloc(len, sizeof(int));
 	if (!sorted)
-		return (NULL);
+		ft_exiterror(buf);
 	i = 0;
 	while (i < len)
 	{
@@ -52,6 +52,7 @@ int	*ft_radixposition(int *buf, int len)
 	}
 	ft_quicksort(sorted, len);
 	ft_radixposition_helper(sorted, buf, len);
+	free(sorted);
 	return (buf);
 }
 /* #include <stdio.h>

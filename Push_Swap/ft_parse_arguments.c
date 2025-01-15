@@ -56,7 +56,6 @@ int		*ft_parse_arguments(int argc, char **argv)
 		actual = ft_atol(buf, &j);
 		if (!k || (actual > 2147483647 || actual < -2147483648) || (j > 11) || !ft_proper_input(buf))
 			ft_exiterror(array);
-		printf("k:%d actual:%ld j:%d\n", k, actual, j);
 		array[i] = (int)actual;
 		i++;
 	}

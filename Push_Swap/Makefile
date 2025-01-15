@@ -1,6 +1,6 @@
 NAME = push_swap
 SRC = ft_parse_arguments.c ft_parse_string.c ft_print.c ft_pushswap.c \
-ft_radixposition.c main.c utils1.c
+ft_radixposition.c main.c utils1.c utils2.c utils3.c utils4.c
 OBJ_DIR = ./dir/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 LIBFT_PATH = ./libft/

@@ -34,7 +34,7 @@ int ft_checkdup(int *array, int len)
 
 int main(int argc, char **argv)
 {
-	int	*buf;
+	int				*buf;
 	int	len;
 
 	len = 0;
@@ -47,15 +47,15 @@ int main(int argc, char **argv)
 		buf = ft_parse_arguments(argc, argv);
 		len = argc - 1;
 	}
-	if (ft_checkdup(buf, len))
+	if (ft_checkdup(buf, len) || len > ARGS_MAX)
 		ft_exiterror(buf);
 	buf = ft_radixposition(buf, len);
 	ft_pushswap(buf, len);
-	
 	for (int i = 0; i < len; i++)
 	{
 		printf("%d ", buf[i]);
 	}
+	free(buf);
 	printf("\n");
 	return (0);
 }

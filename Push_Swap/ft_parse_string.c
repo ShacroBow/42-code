@@ -39,7 +39,6 @@ static int	*ft_turnit(char *str)
 		actual = ft_atol(buf, &j);
 		if ((actual > 2147483647 || actual < -2147483648) || (j > 11) || !ft_proper_input(buf))
 			ft_exiterror(array);
-		printf("k:%d actual:%ld j:%d\n", k, actual, j);
 		array[k] = actual;
 		k++;
 		while (ft_isspace(str[i]))
