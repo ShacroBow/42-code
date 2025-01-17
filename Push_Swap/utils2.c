@@ -88,16 +88,6 @@ t_array	*ft_pointto(t_array *ptr, int index)
 	return (NULL);
 }
 
-int	*ft_commandresize(int *commands, int len)
-{
-	if (commands == NULL)
-	{
-		commands = ft_calloc(len, sizeof(int));
-		return (commands);
-	}
-	commands = ft_realloc(commands, len, len, sizeof(int));
-	return (commands);
-}
 
 int	ft_correctindex(t_array *arrayhead)
 {

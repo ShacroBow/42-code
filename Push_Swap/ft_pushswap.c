@@ -12,6 +12,9 @@
 
 #include "pushswap.h"
 
+
+
+
 int	ft_sort3(t_array *array, int aorb)
 {
 	t_array	*target;
@@ -24,6 +27,77 @@ int	ft_sort3(t_array *array, int aorb)
 		return (ft_reverserotate(array, aorb));
 	if (array->value > array->next->value)
 		return (ft_swap(array, aorb));
+	return (-1);
+}
+int	ft_cal_sorta(t_array **arraya, t_array **arrayb)
+{
+	t_array	*tmp;
+	t_array	*highest;
+	int		mid;
+	int		pushed_off;
+	
+	highest = ft_findhighlow(*arraya, A);
+	tmp = ft_pointto(*arraya, 0);
+	pushed_off = highest->value * 0.70;
+	if (ft_arraysize(*arraya) == 3 && !ft_checksorted(arraya))
+		return (ft_sort3(*arraya, A));
+	
+	if (tmp->value > pushed_off)
+		return (ft_push(arraya, arrayb, A));
+	if (ft)
+	{
+		/* code */
+	}
+	
+}
+
+int	ft_cal_sortb(t_array **arraya, t_array **arrayb)
+{
+	if (aorb == A ft_arraysize(*arraya) == 3 && *arrayb)
+		return (ft_sort3(*arraya, A));
+	
+	if ()
+	{
+	}
+	
+}
+
+
+int	*ft_commandadd(int command, int **commands, int *len)
+{
+	if (command < 0 || command > 10)
+		return (*commands);
+	if (*commands == NULL || !len || *len < 0)
+		return (NULL);
+	*commands = ft_realloc(*commands, *len - 1 , *len + 1, sizeof(int));
+	if (*commands == NULL)
+		return (NULL);
+	(*len)++;
+	(*commands)[(*len) - 1] = command;
+	return (*commands);
+}
+
+int	ft_sortsmall(t_array **arraya, t_array **arrayb, int *commands, int *len)
+{
+	t_array	*target;
+	t_array	*head;
+	t_array	*last;
+	t_array	*min;
+
+	head = ft_pointto(array, 0);
+	last = ft_pointto(array, -1);
+	min = ft_findhighlow(array, B);
+	while (1)
+	{
+		len++;
+		
+		if (!commands)
+			return (-1);
+		commands = ft_commandadd(ft_cal_sorta(araryb, arrayb), &commands, &len);
+		commands = ft_commandadd(ft_cal_sortb(araryb, arrayb), &commands, &len);
+		if (ft_checksorted(*arraya) && *arrayb = NULL)
+			break;
+	}
 	return (-1);
 }
 
@@ -57,16 +131,11 @@ void ft_pushswap(int *array, int len)
 	commands = ft_compresscommands(commands, &i);
 	if (!commands)
 			return (ft_exit_pushswap(a), ft_exit_pushswap(b));
-	while (comlen < i)
-	{
-		ft_print(commands[comlen]);
-		write(1, "\n", 1);
-		comlen++;
-	}
+	ft_commandprinter(commands, i);
 	a = ft_pointto(a, 0);
 	while (1)
 	{
-		printf("arrary[%d]\n", a->value);
+		// printf("arrary[%d]\n", a->value);
 		a = a->next;
 		if (a->index == 0)
 			break;

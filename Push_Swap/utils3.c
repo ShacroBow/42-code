@@ -66,7 +66,7 @@ t_array	*ft_applyarray(t_array *linkedlist, int *array, int len)
 	return (last->next);
 }
 
-int	ft_push(t_array *array, t_array **target, int aorb)
+int	ft_push(t_array **array, t_array **target, int aorb)
 {
 	int		i;
 	t_array	*last;
@@ -74,10 +74,12 @@ int	ft_push(t_array *array, t_array **target, int aorb)
 	t_array	*tmp;
 
 	i = 0;
-	last = ft_pointto(array, -1);
-	head = ft_pointto(array, 0);
+	last = ft_pointto(*array, -1);
+	head = ft_pointto(*array, 0);
 	last->next = head->next;
 	ft_correctindex(last->next);
+	if (head == head->next)
+		*array = NULL;
 	if (*target == NULL)
 	{
 		*target = head;
@@ -91,5 +93,6 @@ int	ft_push(t_array *array, t_array **target, int aorb)
 		head->next = tmp;
 		ft_correctindex(last->next);
 	}
+	
 	return (9 + aorb);
 }

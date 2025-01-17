@@ -51,10 +51,10 @@ int main(int argc, char **argv)
 		ft_exiterror(buf);
 	buf = ft_radixposition(buf, len);
 	ft_pushswap(buf, len);
-	for (int i = 0; i < len; i++)
-	{
-		printf("%d ", buf[i]);
-	}
+	// for (int i = 0; i < len; i++)
+	// {
+	// 	printf("%d ", buf[i]);
+	// }
 	free(buf);
 	printf("\n");
 	return (0);
