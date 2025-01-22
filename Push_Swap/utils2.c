@@ -108,3 +108,17 @@ int	ft_correctindex(t_array *arrayhead)
 	}
 	return (-1);
 }
+
+int	*ft_commandadd(int command, int **commands, int *len)
+{
+	if (command < 0 || command > 10)
+		return (*commands);
+	if (*commands == NULL || len == NULL || *len < 0)
+		return (NULL);
+	*commands = ft_realloc(*commands, *len - 1 , *len + 1, sizeof(int));
+	if (*commands == NULL)
+		return (NULL);
+	(*len)++;
+	(*commands)[(*len) - 1] = command;
+	return (*commands);
+}

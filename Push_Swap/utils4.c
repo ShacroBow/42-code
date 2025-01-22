@@ -56,7 +56,7 @@ int	*ft_compresscommands(int *commands, int *len)
 	int	i;
 	int	j;
 	int	previousval;
-	int	*result;
+	int	*tmp;
 
 	i = 0;
 	j = 0;
@@ -66,19 +66,14 @@ int	*ft_compresscommands(int *commands, int *len)
 		i++;
 		if ((previousval + 1) == commands[i] || (previousval - 1) == commands[i])
 		{
-			commands[j] = ft_compresscommands_helper(commands[i], previousval);
-			j++;
+			ft_commandadd(ft_compresscommands_helper(commands[i], previousval), tmp, &j);
 			i++;
 		}
 		else
-		{
-			commands[j] = previousval;
-			j++;
-		}
+			ft_commandadd(commands[i], tmp, &j);
 	}
-	result = ft_realloc(commands, *len, j, sizeof(int));
 	*len = j;
-	return (result);
+	return (tmp);
 }
 
 t_array *ft_findhighlow(t_array *array, int aorb)

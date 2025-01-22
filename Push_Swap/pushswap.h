@@ -62,13 +62,11 @@ int		ft_index(t_array *array);
 int		ft_value(t_array *array);
 t_array	*ft_next(t_array *array);
 int		ft_arraysize(t_array *array);
-//-unmade
 int		*ft_commandadd(int command,int *commands, int *len);
-int		ft_movecost(t_array *array);
+//-unmade
+int		ft_peakfinished(t_array **array, int peak);
 int		ft_sortsmall(t_array *arraya, t_array *arrayb);
 int		ft_sortmid(t_array *arraya, t_array *arrayb);
 int		ft_sortlarge(t_array *arraya, t_array *arrayb);
-//undoes one single command
-int		ft_backtrace(t_array *a, t_array *b, int *commands, int len);
 
 #endif

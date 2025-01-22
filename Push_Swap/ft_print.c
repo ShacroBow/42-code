@@ -51,7 +51,7 @@ void	ft_print(int command)
 	if (command == 8)
 		ft_putstr("rrr");
 	if (command == 9)
-		ft_putstr("pa");
-	if (command == 10)
 		ft_putstr("pb");
+	if (command == 10)
+		ft_putstr("pa");
 }

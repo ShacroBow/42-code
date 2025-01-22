@@ -12,9 +12,6 @@
 
 #include "pushswap.h"
 
-
-
-
 int	ft_sort3(t_array *array, int aorb)
 {
 	t_array	*target;
@@ -29,76 +26,76 @@ int	ft_sort3(t_array *array, int aorb)
 		return (ft_swap(array, aorb));
 	return (-1);
 }
-int	ft_cal_sorta(t_array **arraya, t_array **arrayb)
+int	ft_cal_sorta(t_array **arraya, t_array **arrayb, int peak)
 {
 	t_array	*tmp;
-	t_array	*highest;
-	int		mid;
+	t_array	*tmp2;
 	int		pushed_off;
 	
-	highest = ft_findhighlow(*arraya, A);
 	tmp = ft_pointto(*arraya, 0);
-	pushed_off = highest->value * 0.70;
-	if (ft_arraysize(*arraya) == 3 && !ft_checksorted(arraya))
-		return (ft_sort3(*arraya, A));
-	
-	if (tmp->value > pushed_off)
+	tmp2 = ft_pointto(*arraya, -1);
+	if (ft_checksorted(tmp))
+		return (-1);
+	if (!ft_peakfinished(arraya, peak) && tmp->value < (peak / 2))
 		return (ft_push(arraya, arrayb, A));
-	if (ft)
-	{
-		/* code */
-	}
-	
+	if (tmp->value > tmp->next->value)
+		return (ft_swap(*arraya, A));
+	if (tmp->value < tmp2->value)
+		return (ft_reverserotate(*arraya, A));
+	return (ft_rotate(*arraya, A));
 }
 
-int	ft_cal_sortb(t_array **arraya, t_array **arrayb)
+int	ft_cal_sortb(t_array **arraya, t_array **arrayb, int peak)
 {
-	if (aorb == A ft_arraysize(*arraya) == 3 && *arrayb)
-		return (ft_sort3(*arraya, A));
+	t_array	*tmp;
+	t_array	*tmp2;
+	int		pushed_off;
 	
-	if ()
-	{
-	}
-	
+	tmp = ft_pointto(*arrayb, 0);
+	tmp2 = ft_pointto(*arrayb, -1);
+	if (ft_checksorted(tmp))
+		return (-1);
+	if (!ft_peakfinished(arraya, peak))
+		return (-1);
+	if (tmp->value > tmp->next->value)
+		return (ft_swap(*arrayb, B));
+	if (tmp->value < tmp2->value)
+		return (ft_reverserotate(*arrayb, B));
+	return (ft_rotate(*arrayb, B));
 }
 
-
-int	*ft_commandadd(int command, int **commands, int *len)
+int ft_peakfinished(t_array **arraya, int peak)
 {
-	if (command < 0 || command > 10)
-		return (*commands);
-	if (*commands == NULL || !len || *len < 0)
-		return (NULL);
-	*commands = ft_realloc(*commands, *len - 1 , *len + 1, sizeof(int));
-	if (*commands == NULL)
-		return (NULL);
-	(*len)++;
-	(*commands)[(*len) - 1] = command;
-	return (*commands);
+	while (1)
+	{
+		
+	}
+	return (100000000000000000000000)
 }
 
-int	ft_sortsmall(t_array **arraya, t_array **arrayb, int *commands, int *len)
+
+int	*ft_sortsmall(t_array **arraya, t_array **arrayb, int *commands, int *len)
 {
 	t_array	*target;
 	t_array	*head;
 	t_array	*last;
-	t_array	*min;
+	int		peak;
 
+	if (ft_arraysize(*arraya) == 3 && *arrayb == NULL)
+		ft_sort3(*arraya, A);
 	head = ft_pointto(array, 0);
 	last = ft_pointto(array, -1);
-	min = ft_findhighlow(array, B);
+	peak = ft_value(ft_findhighlow(array, A));
 	while (1)
 	{
-		len++;
-		
 		if (!commands)
-			return (-1);
-		commands = ft_commandadd(ft_cal_sorta(araryb, arrayb), &commands, &len);
-		commands = ft_commandadd(ft_cal_sortb(araryb, arrayb), &commands, &len);
+			return (NULL);
+		ft_commandadd(ft_cal_sorta(araryb, arrayb, peak), commands, len);
+		ft_commandadd(ft_cal_sortb(araryb, arrayb, peak), commands, len);
 		if (ft_checksorted(*arraya) && *arrayb = NULL)
 			break;
 	}
-	return (-1);
+	return (commands);
 }
 
 void ft_pushswap(int *array, int len)
