@@ -62,10 +62,10 @@ int		ft_index(t_array *array);
 int		ft_value(t_array *array);
 t_array	*ft_next(t_array *array);
 int		ft_arraysize(t_array *array);
-int		*ft_commandadd(int command,int *commands, int *len);
-//-unmade
+int		*ft_comadd(int comadd, int **commands, int *len);
 int		ft_peakfinished(t_array **array, int peak);
-int		ft_sortsmall(t_array *arraya, t_array *arrayb);
+//-unmade
+int		*ft_sortswirl(t_array **arraya, t_array **arrayb, int *commands, int *len);
 int		ft_sortmid(t_array *arraya, t_array *arrayb);
 int		ft_sortlarge(t_array *arraya, t_array *arrayb);
 

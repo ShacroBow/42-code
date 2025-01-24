@@ -26,11 +26,12 @@ int	ft_sort3(t_array *array, int aorb)
 		return (ft_swap(array, aorb));
 	return (-1);
 }
+
+
 int	ft_cal_sorta(t_array **arraya, t_array **arrayb, int peak)
 {
 	t_array	*tmp;
 	t_array	*tmp2;
-	int		pushed_off;
 	
 	tmp = ft_pointto(*arraya, 0);
 	tmp2 = ft_pointto(*arraya, -1);
@@ -38,10 +39,15 @@ int	ft_cal_sorta(t_array **arraya, t_array **arrayb, int peak)
 		return (-1);
 	if (!ft_peakfinished(arraya, peak) && tmp->value < (peak / 2))
 		return (ft_push(arraya, arrayb, A));
+	else if (!ft_peakfinished(arraya, peak) && tmp->value > (peak / 2))
+		return (ft_rotate(*arraya, A));
 	if (tmp->value > tmp->next->value)
 		return (ft_swap(*arraya, A));
-	if (tmp->value < tmp2->value)
+	if (tmp->value > tmp->next->value && tmp2->value > tmp->next->value)
+		return (ft_rotate(*arraya, A));
+	if (tmp2->value < tmp->next->value && tmp->value < tmp2->value)
 		return (ft_reverserotate(*arraya, A));
+	
 	return (ft_rotate(*arraya, A));
 }
 
@@ -49,7 +55,6 @@ int	ft_cal_sortb(t_array **arraya, t_array **arrayb, int peak)
 {
 	t_array	*tmp;
 	t_array	*tmp2;
-	int		pushed_off;
 	
 	tmp = ft_pointto(*arrayb, 0);
 	tmp2 = ft_pointto(*arrayb, -1);
@@ -57,42 +62,50 @@ int	ft_cal_sortb(t_array **arraya, t_array **arrayb, int peak)
 		return (-1);
 	if (!ft_peakfinished(arraya, peak))
 		return (-1);
-	if (tmp->value > tmp->next->value)
+	if (tmp->value < tmp->next->value)
 		return (ft_swap(*arrayb, B));
-	if (tmp->value < tmp2->value)
+	if (tmp->value < tmp->next->value && tmp2->value < tmp->next->value)
+		return (ft_rotate(*arrayb, B));
+	if (tmp2->value > tmp->next->value && tmp->value > tmp2->value)
 		return (ft_reverserotate(*arrayb, B));
 	return (ft_rotate(*arrayb, B));
 }
 
 int ft_peakfinished(t_array **arraya, int peak)
 {
+	int underudder;	
+	t_array	*tmp;
+	t_array	*last;
+
+	tmp = ft_pointto(*arraya, 0);
+	last = ft_pointto(*arraya, -1);
+	underudder = (peak / 2);
 	while (1)
 	{
-		
+		if (tmp->value <= underudder)
+			return (1);
+		if (tmp->index == last->index)
+			return (0);
+		tmp = tmp->next;
 	}
-	return (100000000000000000000000)
+	return (0);
 }
 
 
-int	*ft_sortsmall(t_array **arraya, t_array **arrayb, int *commands, int *len)
+int	*ft_sortswirl(t_array **arraya, t_array **arrayb, int *commands, int *len)
 {
-	t_array	*target;
-	t_array	*head;
-	t_array	*last;
 	int		peak;
 
 	if (ft_arraysize(*arraya) == 3 && *arrayb == NULL)
 		ft_sort3(*arraya, A);
-	head = ft_pointto(array, 0);
-	last = ft_pointto(array, -1);
-	peak = ft_value(ft_findhighlow(array, A));
+	peak = ft_value(ft_findhighlow(*arraya, A));
 	while (1)
 	{
 		if (!commands)
 			return (NULL);
-		ft_commandadd(ft_cal_sorta(araryb, arrayb, peak), commands, len);
-		ft_commandadd(ft_cal_sortb(araryb, arrayb, peak), commands, len);
-		if (ft_checksorted(*arraya) && *arrayb = NULL)
+		commands = ft_comadd(ft_cal_sorta(arraya, arrayb, peak), &commands, len);
+		commands = ft_comadd(ft_cal_sortb(arraya, arrayb, peak), &commands, len);
+		if (ft_checksorted(*arraya) && *arrayb == NULL)
 			break;
 	}
 	return (commands);

@@ -12,14 +12,14 @@
 
 #include "pushswap.h"
 
-void	*ft_freelist(t_array *head, int i)
+void	ft_freelist(t_array *head, int i)
 {
 	int		j;
 	t_array	*ptr;
 	t_array	*tmp;
 
 	if (i <= 0)
-		return (NULL);
+		return ;
 	j = 0;
 	ptr = head;
 	while (j < i)
@@ -29,7 +29,7 @@ void	*ft_freelist(t_array *head, int i)
 		ptr = tmp;
 		j++;
 	}
-	return (NULL);
+	return ;
 }
 
 t_array	*ft_createlist(int len)
@@ -46,7 +46,7 @@ t_array	*ft_createlist(int len)
 	{
 		new_node = (t_array *)ft_calloc(1, sizeof(t_array));
 		if (!new_node)
-			return (ft_freelist(head, i));
+			return (ft_freelist(head, i), NULL);
 		new_node->index = i;
 		if (i == 0)
 		{
@@ -109,16 +109,20 @@ int	ft_correctindex(t_array *arrayhead)
 	return (-1);
 }
 
-int	*ft_commandadd(int command, int **commands, int *len)
+int	*ft_comadd(int comadd, int **commands, int *len)
 {
-	if (command < 0 || command > 10)
+	int *tmp;
+
+	if (comadd < 0 || comadd > 10)
 		return (*commands);
 	if (*commands == NULL || len == NULL || *len < 0)
 		return (NULL);
+	tmp = *commands;
 	*commands = ft_realloc(*commands, *len - 1 , *len + 1, sizeof(int));
 	if (*commands == NULL)
 		return (NULL);
+	free(tmp);
 	(*len)++;
-	(*commands)[(*len) - 1] = command;
+	(*commands)[(*len) - 1] = comadd;
 	return (*commands);
 }

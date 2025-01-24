@@ -66,11 +66,11 @@ int	*ft_compresscommands(int *commands, int *len)
 		i++;
 		if ((previousval + 1) == commands[i] || (previousval - 1) == commands[i])
 		{
-			ft_commandadd(ft_compresscommands_helper(commands[i], previousval), tmp, &j);
+			tmp = ft_comadd(ft_compresscommands_helper(commands[i], previousval), &tmp, &j);
 			i++;
 		}
 		else
-			ft_commandadd(commands[i], tmp, &j);
+			tmp = ft_comadd(commands[i], &tmp, &j);
 	}
 	*len = j;
 	return (tmp);
