@@ -31,7 +31,7 @@ typedef struct s_array
 	struct s_array	*next;
 }	t_array;
 
-void	ft_pushswap(int *array, int len);
+t_array	*ft_pushswap(t_array **arraya, t_array **arraybcommands);
 void	ft_print(int command);
 int		*ft_radixposition(int *buf, int len);
 int		*ft_parse_arguments(int argc, char **argv);
@@ -42,7 +42,6 @@ char	*ft_proper_input(char *str);
 int		ft_count_arguments(char *str);
 void	ft_exiterror(void *str);
 t_array	*ft_createlist(int len);
-void	ft_freelist(t_array *head, int i);
 //index < 0. means it will point to last element.
 t_array	*ft_pointto(t_array *ptr, int index);
 int		ft_swap(t_array *array, int aorb);
@@ -51,22 +50,29 @@ int		ft_push(t_array **array, t_array **target, int aorb);
 int		ft_rotate(t_array *array, int aorb);
 int		ft_reverserotate(t_array *array, int aorb);
 t_array	*ft_applyarray(t_array *linkedlist, int *array, int len);
-void	ft_commandprinter(int *commands, int len);
+void	ft_commandprinter(t_array *commands);
 int		ft_checkchunk(t_array *array, int startindex, int endindex);
-int		ft_checksorted(t_array *array);
-int		*ft_compresscommands(int *commands, int *len);
-int		ft_sort3(t_array *array, int aorb);
+int		ft_checksorted(t_array *array, int aorb);
+//A means you look for max. B means you look for min
 t_array	*ft_findhighlow(t_array *array, int aorb);
-void	ft_exit_pushswap(t_array *array);
 int		ft_index(t_array *array);
 int		ft_value(t_array *array);
 t_array	*ft_next(t_array *array);
 int		ft_arraysize(t_array *array);
-int		*ft_comadd(int comadd, int **commands, int *len);
+t_array	*ft_comadd(int comadd, t_array *commands);
 int		ft_peakfinished(t_array **array, int peak);
+void	ft_freearray(t_array **array);
+int		ft_checkchunk_b(t_array *array, int startindex, int endindex);
+t_array	*ft_backtrace(t_array **arraya, t_array **arrayb, t_array *commands, int n);
+int		ft_sortsmall(t_array *array);
+t_array	*ft_sortswirl(t_array **arraya, t_array **arrayb, t_array **commands);
+int		ft_splitstacks(t_array **arraya, t_array **arrayb, int peak);
+int		ft_insert_sorta(t_array **arraya, t_array **arrayb);
+int		ft_insert_sortb(t_array **arraya, t_array **arrayb);
+int		ft_find_direction(t_array *array, int targetcutoff);
 //-unmade
-int		*ft_sortswirl(t_array **arraya, t_array **arrayb, int *commands, int *len);
-int		ft_sortmid(t_array *arraya, t_array *arrayb);
-int		ft_sortlarge(t_array *arraya, t_array *arrayb);
-
+t_array	*ft_ogrechunk(t_array **arya, t_array **aryb, t_array **com, int n);
+t_array	*ft_compresscommands(t_array *commands);
+//must be deleted after being done.
+void	ft_arrayprint(t_array *array);
 #endif

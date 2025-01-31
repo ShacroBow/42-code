@@ -1,6 +1,7 @@
 NAME = push_swap
-SRC = ft_parse_arguments.c ft_parse_string.c ft_print.c ft_pushswap.c \
-ft_radixposition.c main.c utils1.c utils2.c utils3.c utils4.c utils5.c \
+SRC =	ft_parse_arguments.c ft_parse_string.c ft_print.c ft_pushswap.c \
+		ft_radixposition.c main.c utils1.c utils2.c utils3.c utils4.c utils5.c \
+		ft_backtrace.c ft_sortswirl.c
 OBJ_DIR = ./dir/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 LIBFT_PATH = ./libft/
@@ -23,7 +24,7 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 $(LIBFT_PATH)$(LIBFT):
-	make -C $(LIBFT_PATH) all
+	make -C $(LIBFT_PATH) all -j8
 
 clean:
 	rm -f $(OBJ)

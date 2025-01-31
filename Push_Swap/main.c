@@ -34,10 +34,14 @@ int ft_checkdup(int *array, int len)
 
 int main(int argc, char **argv)
 {
-	int				*buf;
+	int	*buf;
 	int	len;
+	t_array *commands;
+	t_array *a;
+	t_array *b;
 
 	len = 0;
+	b = NULL;
 	if (argc < 2)
 		return 0;
 	if (argc == 2)
@@ -49,13 +53,15 @@ int main(int argc, char **argv)
 	}
 	if (ft_checkdup(buf, len) || len > ARGS_MAX)
 		ft_exiterror(buf);
+	if (len == 1)
+		return (0);
 	buf = ft_radixposition(buf, len);
-	ft_pushswap(buf, len);
-	// for (int i = 0; i < len; i++)
-	// {
-	// 	printf("%d ", buf[i]);
-	// }
+	a = ft_createlist(len);
+	a = ft_applyarray(a, buf, len);
 	free(buf);
-	printf("\n");
+	commands = ft_pushswap(&a, &b);
+	ft_commandprinter(commands);
+	ft_freearray(&commands);
 	return (0);
 }
+

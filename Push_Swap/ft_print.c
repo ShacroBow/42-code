@@ -12,17 +12,24 @@
 
 #include "pushswap.h"
 
-void	ft_commandprinter(int *commands, int len)
+void	ft_commandprinter(t_array *commands)
 {
-	int	i;
+	int		i;
+	int		j;
+	t_array	*tmp;
 
 	i = 0;
-	while (i < len)
+	j = ft_arraysize(commands);
+	tmp = ft_pointto(commands, -1);
+	while (i < j)
 	{
-		ft_print(commands[i]);
+		// printf("ft_print logic code[%d]\n", tmp->value);
+		ft_print(tmp->value);
 		write(1, "\n", 1);
 		i++;
+		tmp = ft_pointto(tmp, tmp->index - 1);
 	}
+	// printf("compute[%d]\n", ft_arraysize(commands));
 }
 
 static void	ft_putstr(char *s)

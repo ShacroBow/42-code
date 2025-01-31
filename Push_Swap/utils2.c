@@ -12,24 +12,27 @@
 
 #include "pushswap.h"
 
-void	ft_freelist(t_array *head, int i)
+void	ft_freearray(t_array **array)
 {
+	int		i;
 	int		j;
 	t_array	*ptr;
 	t_array	*tmp;
 
-	if (i <= 0)
-		return ;
 	j = 0;
-	ptr = head;
+	if (*array == NULL)
+		return ;
+	tmp = ft_pointto(*array, -1);
+	i = tmp->index + 1;
+	ptr = ft_pointto(*array, 0);
 	while (j < i)
 	{
-		tmp = ptr->next;
-		free(ptr);
-		ptr = tmp;
+		tmp = ptr;
+		ptr = ptr->next;
+		free(tmp);
 		j++;
 	}
-	return ;
+	*array = NULL;
 }
 
 t_array	*ft_createlist(int len)
@@ -37,27 +40,21 @@ t_array	*ft_createlist(int len)
 	int		i;
 	t_array	*new_node;
 	t_array	*head;
-	t_array	*current;
 
 	if (len <= 0)
 		return (NULL);
 	i = 0;
+	head = NULL;
 	while (i < len)
 	{
 		new_node = (t_array *)ft_calloc(1, sizeof(t_array));
 		if (!new_node)
-			return (ft_freelist(head, i), NULL);
-		new_node->index = i;
-		if (i == 0)
-		{
-			head = new_node;
-			current = new_node;
-		}
-		current->next = new_node;
-		current = new_node;
+			return (ft_freearray(&head), NULL);
+		new_node->next = new_node;
+		
+		ft_push(&new_node, &head, -9);
 		i++;
 	}
-	current->next = head;
 	return (head);
 }
 
@@ -109,20 +106,19 @@ int	ft_correctindex(t_array *arrayhead)
 	return (-1);
 }
 
-int	*ft_comadd(int comadd, int **commands, int *len)
+t_array	*ft_comadd(int comadd, t_array *commands)
 {
-	int *tmp;
+	t_array *tmp;
 
 	if (comadd < 0 || comadd > 10)
-		return (*commands);
-	if (*commands == NULL || len == NULL || *len < 0)
-		return (NULL);
-	tmp = *commands;
-	*commands = ft_realloc(*commands, *len - 1 , *len + 1, sizeof(int));
-	if (*commands == NULL)
-		return (NULL);
-	free(tmp);
-	(*len)++;
-	(*commands)[(*len) - 1] = comadd;
-	return (*commands);
+		return (commands);
+	tmp = ft_createlist(1);
+	if (!tmp)
+		return (ft_freearray(&commands), NULL);
+	tmp->value = comadd;
+	if (commands == NULL)
+		return (tmp);
+	commands = ft_pointto(commands, 0);
+	ft_push(&tmp, &commands, -9);
+	return (commands);
 }

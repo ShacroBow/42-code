@@ -46,6 +46,55 @@ int	ft_reverserotate(t_array *array, int aorb)
 	return (6 + aorb);
 }
 
+static void ft_push_helper(t_array **array)
+{
+	t_array *last;
+	t_array *head;
+
+	last = ft_pointto(*array, -1);
+	head = ft_pointto(*array, 0);
+	if (head == head->next)
+		*array = NULL;
+	else if (*array != NULL && head->next == last)
+	{
+		head->next = head;
+		last->next = last;
+		*array = last;
+		ft_correctindex(*array);
+	}
+	else
+	{
+		last->next = head->next;
+		*array = last->next;
+		ft_correctindex(*array);
+	}
+}
+
+int ft_push(t_array **array, t_array **target, int aorb)
+{
+	t_array *head;
+	t_array *last;
+
+	last = ft_pointto(*array, -1);
+	head = ft_pointto(*array, 0);
+	ft_push_helper(array);
+	if (*target == NULL)
+	{
+		(*target) = head;
+		(*target)->next = (*target);
+	}
+	else if (target)
+	{
+		(*target) = ft_pointto(*target, -1);
+		head->next = (*target)->next;
+		(*target)->next = head;
+		ft_correctindex(head);
+		(*target) = head;
+	}
+	
+	return (9 + aorb);
+}
+
 t_array	*ft_applyarray(t_array *linkedlist, int *array, int len)
 {
 	int		i;
@@ -64,35 +113,4 @@ t_array	*ft_applyarray(t_array *linkedlist, int *array, int len)
 		i++;
 	}
 	return (last->next);
-}
-
-int	ft_push(t_array **array, t_array **target, int aorb)
-{
-	int		i;
-	t_array	*last;
-	t_array	*head;
-	t_array	*tmp;
-
-	i = 0;
-	last = ft_pointto(*array, -1);
-	head = ft_pointto(*array, 0);
-	last->next = head->next;
-	ft_correctindex(last->next);
-	if (head == head->next)
-		*array = NULL;
-	if (*target == NULL)
-	{
-		*target = head;
-		(*target)->next = *target;
-	}
-	else
-	{
-		last = ft_pointto(*target, -1);
-		tmp = last->next->next;
-		last->next = head;
-		head->next = tmp;
-		ft_correctindex(last->next);
-	}
-	
-	return (9 + aorb);
 }
