@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:15:03 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/12/20 20:56:34 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:55:46 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ long	ft_atol(const char *nptr, int *len)
 		i++;
 	while (nptr[i] && ft_isdigit(nptr[i]))
 	{
-		res= (res * 10) + (nptr[i] - '0');
+		res = (res * 10) + (nptr[i] - '0');
 		i++;
 		*len += 1;
 	}
 	return (res * sign);
 }
 
-char *ft_proper_input(char *str)
+char	*ft_proper_input(char *str)
 {
 	size_t	i;
 	short	in;
@@ -54,11 +54,12 @@ char *ft_proper_input(char *str)
 		i++;
 	while (str[i])
 	{
-		if (!(ft_isdigit(str[i]) || ((str[i] == '-'|| str[i] == '+') && in == 1)))
+		if (!(ft_isdigit(str[i]) || \
+			((str[i] == '-' || str[i] == '+') && in == 1)))
 			return (NULL);
-		if ((str[i] == '-'|| str[i] == '+') && in == 0)
+		if ((str[i] == '-' || str[i] == '+') && in == 0)
 			return (NULL);
-		if ((str[i] == '-'|| str[i] == '+') && in == 1)
+		if ((str[i] == '-' || str[i] == '+') && in == 1)
 			in = 1;
 		else if (in == 1)
 			in = 0;
@@ -77,10 +78,10 @@ int	ft_count_arguments(char *str)
 	while (str[i])
 	{
 		while (ft_isspace(str[i]))
-		 i++;
-		if (ft_isdigit(str[i]) || (str[i] == '-'|| str[i] == '+'))
+			i++;
+		if (ft_isdigit(str[i]) || (str[i] == '-' || str[i] == '+'))
 			j += 1;
-		while (ft_isdigit(str[i]) || (str[i] == '-'|| str[i] == '+'))
+		while (ft_isdigit(str[i]) || (str[i] == '-' || str[i] == '+'))
 			i++;
 	}
 	return (j);
@@ -88,17 +89,17 @@ int	ft_count_arguments(char *str)
 
 char	*ft_skipwhitespace(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == NULL || str[i] == '\0')
-		return NULL;// ft_exiterror(NULL);
+		return (NULL);
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	return (str + i);
 }
 
-void ft_exiterror(void *str)
+void	ft_exiterror(void *str)
 {
 	if (str != NULL)
 		free(str);

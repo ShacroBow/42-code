@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:43:03 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/01/06 19:43:06 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:58:34 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	ft_reverserotate(t_array *array, int aorb)
 	return (6 + aorb);
 }
 
-static void ft_push_helper(t_array **array)
+static void	ft_push_helper(t_array **array)
 {
-	t_array *last;
-	t_array *head;
+	t_array	*last;
+	t_array	*head;
 
 	last = ft_pointto(*array, -1);
 	head = ft_pointto(*array, 0);
@@ -70,10 +70,10 @@ static void ft_push_helper(t_array **array)
 	}
 }
 
-int ft_push(t_array **array, t_array **target, int aorb)
+int	ft_push(t_array **array, t_array **target, int aorb)
 {
-	t_array *head;
-	t_array *last;
+	t_array	*head;
+	t_array	*last;
 
 	last = ft_pointto(*array, -1);
 	head = ft_pointto(*array, 0);
@@ -91,26 +91,5 @@ int ft_push(t_array **array, t_array **target, int aorb)
 		ft_correctindex(head);
 		(*target) = head;
 	}
-	
 	return (9 + aorb);
-}
-
-t_array	*ft_applyarray(t_array *linkedlist, int *array, int len)
-{
-	int		i;
-	t_array	*tmp;
-	t_array	*last;
-
-	if (linkedlist == NULL)
-		return (NULL);
-	i = 0;
-	last = ft_pointto(linkedlist, -1);
-	while (i < len)
-	{
-		tmp = ft_pointto(linkedlist, i);
-		tmp->value = array[i];
-		
-		i++;
-	}
-	return (last->next);
 }

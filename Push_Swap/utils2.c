@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:39:23 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/12/25 18:39:32 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:57:04 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_array	*ft_createlist(int len)
 		if (!new_node)
 			return (ft_freearray(&head), NULL);
 		new_node->next = new_node;
-		
 		ft_push(&new_node, &head, -9);
 		i++;
 	}
@@ -85,7 +84,6 @@ t_array	*ft_pointto(t_array *ptr, int index)
 	return (NULL);
 }
 
-
 int	ft_correctindex(t_array *arrayhead)
 {
 	int		i;
@@ -108,7 +106,7 @@ int	ft_correctindex(t_array *arrayhead)
 
 t_array	*ft_comadd(int comadd, t_array *commands)
 {
-	t_array *tmp;
+	t_array	*tmp;
 
 	if (comadd < 0 || comadd > 10)
 		return (commands);

@@ -6,15 +6,13 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:15 by kmashkoo          #+#    #+#             */
-/*   Updated: 2024/12/20 19:36:25 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:47:37 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 # include <unistd.h>
-# include <stdio.h>
-# include <limits.h>
 # include "libft/libft.h"
 # define A 0
 # define B 1
@@ -56,23 +54,22 @@ int		ft_checksorted(t_array *array, int aorb);
 //A means you look for max. B means you look for min
 t_array	*ft_findhighlow(t_array *array, int aorb);
 int		ft_index(t_array *array);
+// t_array	*ft_next(t_array *array);
 int		ft_value(t_array *array);
-t_array	*ft_next(t_array *array);
 int		ft_arraysize(t_array *array);
 t_array	*ft_comadd(int comadd, t_array *commands);
 int		ft_peakfinished(t_array **array, int peak);
 void	ft_freearray(t_array **array);
 int		ft_checkchunk_b(t_array *array, int startindex, int endindex);
-t_array	*ft_backtrace(t_array **arraya, t_array **arrayb, t_array *commands, int n);
+t_array	*ft_backtrace(t_array **arraya, t_array **arrayb, t_array *com, int n);
+//sorting algorithms
 int		ft_sortsmall(t_array *array);
 t_array	*ft_sortswirl(t_array **arraya, t_array **arrayb, t_array **commands);
 int		ft_splitstacks(t_array **arraya, t_array **arrayb, int peak);
 int		ft_insert_sorta(t_array **arraya, t_array **arrayb);
 int		ft_insert_sortb(t_array **arraya, t_array **arrayb);
 int		ft_find_direction(t_array *array, int targetcutoff);
-//-unmade
+t_array	*ft_ogresize(t_array **arraya, t_array **arrayb, t_array **com, int n);
 t_array	*ft_ogrechunk(t_array **arya, t_array **aryb, t_array **com, int n);
-t_array	*ft_compresscommands(t_array *commands);
-//must be deleted after being done.
-void	ft_arrayprint(t_array *array);
+t_array	*ft_ogrebackchunk(t_array **arya, t_array **aryb, t_array **com);
 #endif

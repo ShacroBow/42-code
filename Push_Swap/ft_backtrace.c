@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_backtrace.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 14:48:08 by kmashkoo          #+#    #+#             */
+/*   Updated: 2025/02/01 14:48:23 by kmashkoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pushswap.h"
 
@@ -53,7 +64,6 @@ t_array	*ft_backtrace(t_array **arraya, t_array **arrayb, t_array *com, int n)
 	int		i;
 	t_array	*tmp;
 
-	
 	i = 0;
 	tmp = ft_pointto(com, 0);
 	while (i < n)

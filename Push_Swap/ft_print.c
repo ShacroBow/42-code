@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:51:17 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/01/15 16:51:18 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:49:00 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ void	ft_commandprinter(t_array *commands)
 	tmp = ft_pointto(commands, -1);
 	while (i < j)
 	{
-		// printf("ft_print logic code[%d]\n", tmp->value);
 		ft_print(tmp->value);
 		write(1, "\n", 1);
 		i++;
 		tmp = ft_pointto(tmp, tmp->index - 1);
 	}
-	// printf("compute[%d]\n", ft_arraysize(commands));
 }
 
 static void	ft_putstr(char *s)
