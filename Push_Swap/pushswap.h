@@ -6,13 +6,14 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:15 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 15:47:37 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 20:31:47 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 # include <unistd.h>
+# include <stdio.h>
 # include "libft/libft.h"
 # define A 0
 # define B 1
@@ -32,8 +33,8 @@ typedef struct s_array
 t_array	*ft_pushswap(t_array **arraya, t_array **arraybcommands);
 void	ft_print(int command);
 int		*ft_radixposition(int *buf, int len);
-int		*ft_parse_arguments(int argc, char **argv);
-int		*ft_parse_string(char *argv, int *len);
+// int		*ft_parse_arguments(char **argv, int *len);
+int		*ft_parse_string(char **argv, int *array, int *len);
 long	ft_atol(const char *nptr, int *len);
 char	*ft_skipwhitespace(char *str);
 char	*ft_proper_input(char *str);

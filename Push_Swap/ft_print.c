@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:51:17 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:49:00 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:48:45 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	ft_commandprinter(t_array *commands)
 	t_array	*tmp;
 
 	i = 0;
+	if (commands->value > ARGS_MAX)
+	{
+		write(1, "\n", 1);
+		return ;
+	}
 	j = ft_arraysize(commands);
 	tmp = ft_pointto(commands, -1);
 	while (i < j)
@@ -28,6 +33,7 @@ void	ft_commandprinter(t_array *commands)
 		i++;
 		tmp = ft_pointto(tmp, tmp->index - 1);
 	}
+	ft_freearray(&commands);
 }
 
 static void	ft_putstr(char *s)

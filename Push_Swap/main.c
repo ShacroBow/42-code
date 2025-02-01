@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:18 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 15:34:13 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:49:04 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,53 @@ int	ft_checkdup(int *array, int len)
 	return (0);
 }
 
+static int	ft_mainhelperhelperhelper(int argc, char **argv)
+{
+	int	i;
+	int	tmp;
+	int	args;
+
+	args = 0;
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_count_arguments(argv[i]) == 0)
+			i++;
+		tmp = ft_count_arguments(argv[i]);
+		if (tmp == -1)
+			return (-1);
+		args += tmp;
+		i++;
+	}
+	return (args);
+}
+
 int	*ft_mainhelper(int argc, char **argv, int *len)
 {
-	int	*buf;
+	int	i;
+	int	args;
+	int	*array;
 
-	if (argc < 2)
-		return (NULL);
-	if (argc == 2)
-		buf = ft_parse_string(argv[1], len);
-	else
+	i = 1;
+	args = 0;
+	array = NULL;
+	if (argc > 1)
 	{
-		buf = ft_parse_arguments(argc, argv);
-		*len = argc - 1;
+		args = ft_mainhelperhelperhelper(argc, argv);
+		*len = 0;
+		array = ft_calloc(args + 1, sizeof(int));
+		if (!array || args == -1)
+			ft_exiterror(array);
+		i = 1;
+		while (i < argc)
+		{
+			if (ft_count_arguments(argv[i]) == 0)
+				i++;
+			array = ft_parse_string(&(argv[i]), array, len);
+			i++;
+		}
 	}
-	return (buf);
+	return (array);
 }
 
 int	main(int argc, char **argv)
@@ -58,19 +91,18 @@ int	main(int argc, char **argv)
 
 	len = 0;
 	b = NULL;
+	a = NULL;
 	buf = ft_mainhelper(argc, argv, &len);
-	a = ft_createlist(len);
-	if (ft_checkdup(buf, len) || len > ARGS_MAX || !buf || !a)
+	if (ft_checkdup(buf, len) || len > ARGS_MAX || !buf || argc < 2)
 		ft_exiterror(buf);
-	if (len == 1)
-		return (0);
 	buf = ft_radixposition(buf, len);
+	a = ft_createlist(len);
+	if (!a)
+		ft_exiterror(buf);
 	a = ft_applyarray(a, buf, len);
-	free(buf);
 	commands = ft_pushswap(&a, &b);
 	if (!commands)
 		ft_exiterror(buf);
 	ft_commandprinter(commands);
-	ft_freearray(&commands);
-	return (0);
+	return (free(buf), ft_freearray(&a), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:51:23 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:41:39 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:48:18 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ t_array	*ft_pushswap(t_array **arraya, t_array **arrayb)
 	(*arraya) = ft_pointto((*arraya), 0);
 	while (!ft_checksorted(*arraya, A) && ft_arraysize(*arraya) < 6)
 		commands = ft_comadd(ft_sortsmall(*arraya), commands);
+	if (ft_checksorted(*arraya, A) && commands == NULL)
+		return (((*arraya)->value = ARGS_MAX * 2), *arraya);
 	if (ft_checksorted(*arraya, A) && ft_arraysize(commands) < 10)
 		return (commands);
 	commands = ft_backtrace(arraya, arrayb, commands, ft_arraysize(commands));

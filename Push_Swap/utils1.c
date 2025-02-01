@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:15:03 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:55:46 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:25:30 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ int	ft_count_arguments(char *str)
 			j += 1;
 		while (ft_isdigit(str[i]) || (str[i] == '-' || str[i] == '+'))
 			i++;
+		if (!((ft_isdigit(str[i])) || (str[i] == '-' || \
+			str[i] == '+') || str[i] == ' ') && str[i] != '\0')
+			return (-1);
+		if (((str[i - 1] == '-' || str[i - 1] == '+') && !ft_isdigit(str[i])) \
+			&& str[i] != '\0')
+			return (-1);
 	}
 	return (j);
 }
