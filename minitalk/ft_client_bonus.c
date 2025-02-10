@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_client_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 11:26:21 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/10 13:40:03 by kmashkoo         ###   ########.fr       */
+/*   Created: 2025/02/10 13:50:30 by kmashkoo          #+#    #+#             */
+/*   Updated: 2025/02/10 13:50:32 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static void	ft_sendbit(int pid, int signal)
 {
