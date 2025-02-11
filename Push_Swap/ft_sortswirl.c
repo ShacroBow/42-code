@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sortswirl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:49:39 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:51:18 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:17:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ int	ft_insert_sortb(t_array **arraya, t_array **arrayb)
 int	ft_splitstacks(t_array **arraya, t_array **arrayb, int peak)
 {
 	t_array	*head;
-	t_array	*last;
 	int		mid;
 
 	mid = (peak / 2);
 	*arraya = ft_pointto(*arraya, 0);
 	head = ft_pointto(*arraya, 0);
-	last = ft_pointto(*arraya, -1);
 	if (ft_checksorted(*arraya, A))
 		return (-1);
 	if (!ft_peakfinished(arraya, peak) && (head->value <= mid || mid == 0))

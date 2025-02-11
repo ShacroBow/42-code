@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:43:03 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:58:34 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:16:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ static void	ft_push_helper(t_array **array)
 int	ft_push(t_array **array, t_array **target, int aorb)
 {
 	t_array	*head;
-	t_array	*last;
 
-	last = ft_pointto(*array, -1);
 	head = ft_pointto(*array, 0);
 	ft_push_helper(array);
 	if (*target == NULL)

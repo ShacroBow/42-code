@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:11:54 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 20:34:17 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:16:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ static int	*ft_turnit(char *str, int *array, int *len)
 {
 	int			i;
 	int			j;
-	int			k;
 	long int	actual;
 
 	i = 0;
-	k = 0;
 	if (array == NULL)
 		ft_exiterror(NULL);
 	while (str[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ogresort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:40:33 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 14:47:25 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:18:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,9 @@ int	ft_find_target(t_array *array, int target)
 
 t_array	*ft_ogrebackchunk(t_array **arya, t_array **aryb, t_array **com)
 {
-	int		i;
 	int		peak;
 	t_array	*head;
 
-	i = 0;
 	*aryb = ft_pointto(*aryb, 0);
 	while ((*aryb) != NULL)
 	{
