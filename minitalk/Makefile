@@ -10,7 +10,7 @@ OBJ_SERVER = $(SRC_SERVER:%.c=$(OBJ_DIR)%.o)
 OBJ_CLIENT_BONUS = $(SRC_CLIENT_BONUS:%.c=$(OBJ_DIR)%.o)
 OBJ_SERVER_BONUS = $(SRC_SERVER_BONUS:%.c=$(OBJ_DIR)%.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined -pedantic
 
 all: $(NAME_CLIENT)
 
