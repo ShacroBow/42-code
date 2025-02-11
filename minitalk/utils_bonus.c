@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:50:04 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/10 14:38:17 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:43:09 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,25 @@ void	ft_sigactionhandle(struct sigaction s_target)
 		write(1, "sigaction fail\n", 15);
 		exit(1);
 	}
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t			sizecheck;
+	size_t			i;
+	unsigned char	*ptr;
+
+	sizecheck = nmemb * size;
+	if (sizecheck != 0 && sizecheck / nmemb != size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (0);
+	i = 0;
+	while (i != (nmemb * size))
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }

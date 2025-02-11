@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:26:21 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/10 13:40:03 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:40:53 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,37 @@ static void	ft_sendto_server(int pid, const char *str)
 		}
 		str++;
 	}
-	while (1)
+	i = 0;
+	while (i++ < 8)
 		ft_sendbit(pid, SIGUSR2);
+}
+
+static void	ft_sendlength(int pid, const char *str)
+{
+	int		i;
+	int		len;
+	char	buf[20];
+	char	*sendint;
+
+	i = 0;
+	len = 0;
+	while (str[len])
+		len++;
+	while (i < 19)
+		buf[i++] = '\0';
+	if (len == 0)
+	{
+		ft_sendto_server(pid, "0");
+		return ;
+	}
+	while (len > 0)
+	{
+		buf[--i] = (len % 10) + '0';
+		len /= 10;
+	}
+	buf[19] = '\0';
+	sendint = buf + i;
+	ft_sendto_server(pid, sendint);
 }
 
 int	main(int argc, char **argv)
@@ -101,6 +130,7 @@ int	main(int argc, char **argv)
 	ft_putnbr(getpid());
 	write(1, "]\n", 2);
 	ft_sigactionhandle(s_client);
+	ft_sendlength(pid, argv[2]);
 	ft_sendto_server(pid, argv[2]);
 	return (0);
 }
