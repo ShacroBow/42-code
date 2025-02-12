@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ogresort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:40:33 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/11 19:18:05 by codespace        ###   ########.fr       */
+/*   Updated: 2025/02/12 16:21:03 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_array	*ft_ogresize(t_array **arraya, t_array **arrayb, t_array **com, int n)
 			*com = ft_ogrechunk(arraya, arrayb, com, 5);
 		while ((*arrayb))
 			*com = ft_comadd(ft_push(arrayb, arraya, B), *com);
-		if (n > 99 && n < 400)
+		if (n < 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 6 * 2);
 		else if (n > 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 10 * 2);

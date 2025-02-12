@@ -17,7 +17,7 @@ OBJ = $(SRC:.c=.o)
 CC = cc
 AR = ar
 ARFLAGS = rcs
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined -pedantic
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

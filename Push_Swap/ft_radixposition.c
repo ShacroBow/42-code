@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_radixposition.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 22:14:20 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/11 19:47:09 by codespace        ###   ########.fr       */
+/*   Updated: 2025/02/12 17:25:16 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
 
 static void	ft_radixposition_helper(int *sorted, int *buf, int len)
 {
@@ -28,10 +27,8 @@ static void	ft_radixposition_helper(int *sorted, int *buf, int len)
 			if (buf[i] == sorted[j])
 			{
 				buf[i] = j;
-				printf("sorted[i][%3d] = buf[j][%3d] -i[%d]-j[%d]\n", sorted[i], buf[j], i, j);
 				break ;
 			}
-			printf("uniquesorted[i][%3d] = buf[j][%3d] -i[%d]-j[%d]\n", sorted[i], buf[j], i, j);
 			j++;
 		}
 		i++;
@@ -42,31 +39,24 @@ int	*ft_radixposition(int *buf, int len)
 {
 	int	*sorted;
 	int	i;
+	int	tmp;
 
 	i = 0;
+	tmp = 0;
 	if (buf == NULL || len <= 0)
 		return (NULL);
 	sorted = NULL;
 	sorted = ft_calloc(len, sizeof(int));
 	if (!sorted)
-		// ft_exiterror(buf);
-	
-	printf("sorted[i][%3d] = buf[i][%3d] -i[%d]-len[%d]\n", sorted[i], buf[i], i, len);
+		ft_exiterror(buf);
 	while (i < len)
 	{
-		int tmp = buf[i];
+		tmp = buf[i];
 		sorted[i] = tmp;
-		printf("sorted[i][%5d] = buf[i][%5d] -i[%d]\n", sorted[i], buf[i], i);
 		i++;
 	}
 	ft_quicksort(sorted, len);
-	for (int i = 0; i < len; i++)
-		printf("[%3d] ", sorted[i]);
-	printf("\n");
 	ft_radixposition_helper(sorted, buf, i);
-	for (int i = 0; i < len; i++)
-		printf("[%3d] ", buf[i]);
-	printf("\n");
 	free(sorted);
 	return (buf);
 }

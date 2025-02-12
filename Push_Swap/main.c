@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:18 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 21:49:04 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:21:17 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	ft_mainhelperhelperhelper(int argc, char **argv)
 	{
 		if (ft_count_arguments(argv[i]) == 0)
 			i++;
+		if (argv[i] == NULL)
+			return (args);
 		tmp = ft_count_arguments(argv[i]);
 		if (tmp == -1)
 			return (-1);
@@ -67,15 +69,16 @@ int	*ft_mainhelper(int argc, char **argv, int *len)
 		args = ft_mainhelperhelperhelper(argc, argv);
 		*len = 0;
 		array = ft_calloc(args + 1, sizeof(int));
-		if (!array || args == -1)
+		if (!array || args < 1)
 			ft_exiterror(array);
 		i = 1;
 		while (i < argc)
 		{
-			if (ft_count_arguments(argv[i]) == 0)
+			while (argv[i] == NULL || ft_count_arguments(argv[i]) == 0)
 				i++;
-			array = ft_parse_string(&(argv[i]), array, len);
-			i++;
+			if (*len == args)
+				return (array);
+			array = ft_parse_string(&(argv[i++]), array, len);
 		}
 	}
 	return (array);

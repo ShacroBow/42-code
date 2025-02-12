@@ -8,7 +8,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 LIBFT_PATH = ./libft/
 LIBFT = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined -pedantic
+CFLAGS = -Wall -Wextra -Werror -g
 
 
 all: $(NAME)

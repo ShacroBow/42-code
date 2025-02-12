@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:11:54 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/11 19:16:20 by codespace        ###   ########.fr       */
+/*   Updated: 2025/02/12 17:24:22 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static int	*ft_turnit(char *str, int *array, int *len)
 {
 	int			i;
 	int			j;
+	int			k;
 	long int	actual;
 
 	i = 0;
+	k = 0;
 	if (array == NULL)
 		ft_exiterror(NULL);
 	while (str[i])
@@ -60,6 +62,8 @@ int	*ft_parse_string(char **str, int *array, int *len)
 
 	i = 0;
 	j = 0;
+	if ((*str) == NULL || ((*str)[0] == '\0'))
+		ft_exiterror(array);
 	(*str) = ft_skipwhitespace((*str));
 	while (ft_isdigit((*str)[j]) || \
 			((*str)[j] == '-' || (*str)[j] == '+') || (*str)[j] == ' ')

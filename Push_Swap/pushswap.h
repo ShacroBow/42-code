@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:22:15 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 20:31:47 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:24:04 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ int		ft_find_direction(t_array *array, int targetcutoff);
 t_array	*ft_ogresize(t_array **arraya, t_array **arrayb, t_array **com, int n);
 t_array	*ft_ogrechunk(t_array **arya, t_array **aryb, t_array **com, int n);
 t_array	*ft_ogrebackchunk(t_array **arya, t_array **aryb, t_array **com);
+
 #endif

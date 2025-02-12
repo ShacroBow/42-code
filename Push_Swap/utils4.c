@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:51:48 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/01 15:02:30 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:28:11 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_array	*ft_findhighlow(t_array *array, int aorb)
 	int		target;
 
 	tmp = array;
-	target = tmp->value;
+	target = ft_value(tmp);
 	while (aorb == A)
 	{
 		if (target < tmp->value)
