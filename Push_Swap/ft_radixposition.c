@@ -58,6 +58,7 @@ int	*ft_radixposition(int *buf, int len)
 	ft_quicksort(sorted, len);
 	ft_radixposition_helper(sorted, buf, i);
 	free(sorted);
+	i = 0;
 	return (buf);
 }
 /* 

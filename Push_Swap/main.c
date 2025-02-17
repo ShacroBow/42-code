@@ -95,6 +95,8 @@ int	main(int argc, char **argv)
 	len = 0;
 	b = NULL;
 	a = NULL;
+	if (argc == 1)
+		return (write(1, "\n", 1), 0);
 	buf = ft_mainhelper(argc, argv, &len);
 	if (ft_checkdup(buf, len) || len > ARGS_MAX || !buf || argc < 2)
 		ft_exiterror(buf);

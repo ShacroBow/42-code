@@ -19,11 +19,8 @@ void	ft_commandprinter(t_array *commands)
 	t_array	*tmp;
 
 	i = 0;
-	if (commands->value > ARGS_MAX)
-	{
-		write(1, "\n", 1);
+	if (commands->value > ARGS_MAX + 1)
 		return ;
-	}
 	j = ft_arraysize(commands);
 	tmp = ft_pointto(commands, -1);
 	while (i < j)

@@ -40,13 +40,13 @@ t_array	*ft_ogresize(t_array **arraya, t_array **arrayb, t_array **com, int n)
 	{
 		if (n > 99 && n < 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 6);
-		else if (n > 400)
+		else if (n >= 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 5);
 		while ((*arrayb))
 			*com = ft_comadd(ft_push(arrayb, arraya, B), *com);
 		if (n < 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 6 * 2);
-		else if (n > 400)
+		else if (n >= 400)
 			*com = ft_ogrechunk(arraya, arrayb, com, 10 * 2);
 	}
 	else if (n > 6 && n <= 99)
@@ -117,7 +117,7 @@ t_array	*ft_ogrechunk(t_array **arya, t_array **aryb, t_array **com, int n)
 
 	i = 1;
 	chunk = 0;
-	fraction = (ft_value(ft_findhighlow(*arya, A)) / n);
+	fraction = (ft_value(ft_findhighlow(*arya, A + (j = 0))) / n);
 	while (i < n + 1)
 	{
 		chunk += fraction;
