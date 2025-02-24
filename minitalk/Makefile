@@ -5,6 +5,7 @@ SRC_SERVER = ft_server.c utils.c
 SRC_CLIENT_BONUS = ft_client_bonus.c utils_bonus.c
 SRC_SERVER_BONUS = ft_server_bonus.c utils_bonus.c
 OBJ_DIR = ./dir/
+OBJ = $(OBJ_CLIENT) $(OBJ_CLIENT_BONUS) $(OBJ_SERVER) $(OBJ_SERVER_BONUS)
 OBJ_CLIENT = $(SRC_CLIENT:%.c=$(OBJ_DIR)%.o)
 OBJ_SERVER = $(SRC_SERVER:%.c=$(OBJ_DIR)%.o)
 OBJ_CLIENT_BONUS = $(SRC_CLIENT_BONUS:%.c=$(OBJ_DIR)%.o)

@@ -16,7 +16,7 @@ t_global	g_var;
 
 static void	ft_mallocfail(void)
 {
-	write(1, "malloc fail\n", 12);
+	write(2, "malloc fail\n", 12);
 	exit(1);
 }
 
@@ -24,7 +24,7 @@ static void	ft_readlength(void)
 {
 	if ((g_var.ln < 6) && (g_var.byte == 0 && g_var.i > 7))
 	{
-		g_var.ln = atoi(g_var.ptr);
+		g_var.ln = ft_atoi(g_var.ptr);
 		if (g_var.ln <= 5)
 			g_var.ln = 7;
 		if (g_var.ptr != NULL)
@@ -53,7 +53,7 @@ static void	ft_writeorping(siginfo_t *info)
 	{
 		ft_readlength();
 	}
-	usleep(20);
+	usleep(5);
 	if (g_var.ln > 5 && g_var.byte == 0 && g_var.i > 7)
 	{
 		write(1, g_var.ptr, g_var.count);

@@ -66,7 +66,7 @@ void	ft_sigactionhandle(struct sigaction s_target)
 	if (sigaction(SIGUSR1, &s_target, NULL) || \
 		sigaction(SIGUSR2, &s_target, NULL))
 	{
-		write(1, "sigaction fail\n", 15);
+		write(2, "sigaction fail\n", 15);
 		exit(1);
 	}
 }

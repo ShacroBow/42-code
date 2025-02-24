@@ -17,6 +17,7 @@ static void	ft_sendbit(int pid, int signal)
 	int	check;
 
 	check = 0;
+	usleep(3);
 	if (signal == SIGUSR1)
 	{
 		check = kill(pid, SIGUSR1);
