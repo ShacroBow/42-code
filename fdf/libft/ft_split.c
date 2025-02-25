@@ -33,10 +33,10 @@ static size_t	ft_words_counter(const char *str, char c)
 	return (counter);
 }
 
-static char	*ft_altstr_dup(const char *str, int start, int finish)
+static char	*ft_altstr_dup(const char *str, size_t start, size_t finish)
 {
 	char	*word;
-	int		i;
+	size_t	i;
 
 	word = malloc((finish - start + 1) * sizeof(char));
 	if (!word)
@@ -64,16 +64,18 @@ static void	ft_free_split(char **split, int limit)
 static char	**ft_splitcalc_split(const char *s, char c,
 									char **split, size_t i)
 {
-	short int	index;
+	long long	index;
 	size_t		j;
+	size_t		len;
 
 	index = -1;
 	j = 0;
-	while (i <= ft_strlen(s))
+	len = ft_strlen(s);
+	while (i <= len)
 	{
 		if (s[i] != c && index < 0)
 			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		else if ((s[i] == c || i == len) && index >= 0)
 		{
 			split[j++] = ft_altstr_dup(s, index, i);
 			if (!split[j - 1])
@@ -102,6 +104,7 @@ char	**ft_split(char const *s, char c)
 	split = ft_calloc((word_count + 1), sizeof(char **));
 	if (!split)
 		return (NULL);
+	split[word_count] = NULL;
 	return (ft_splitcalc_split(s, c, split, i));
 }
 /* 

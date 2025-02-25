@@ -1,5 +1,6 @@
 NAME = fdf
-SRC = main.c ft_window.c ft_map.c ft_render.c
+SRC = main.c ft_window.c ft_map.c ft_render.c ft_map_utils1.c ft_map_utils2.c \
+	ft_other.c ft_render_utils1.c ft_render_utils2.c
 OBJ_DIR = ./dir/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 LIBFT_PATH = ./libft/
@@ -26,7 +27,7 @@ $(LIBFT_PATH)$(LIBFT):
 	make -C $(LIBFT_PATH) all -j8
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ_DIR)$(OBJ)
 	make -C $(LIBFT_PATH) clean
 
 fclean: clean
