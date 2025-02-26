@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_render_utils2.c                                 :+:      :+:    :+:   */
+/*   ft_render_utils2_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:06:31 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/26 15:06:32 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:29:42 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	ft_transform_point(t_data *data, t_point *point)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_other.c                                         :+:      :+:    :+:   */
+/*   ft_other_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:06:19 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/26 15:06:20 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:29:25 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	ft_keyhandler_transform(int keycode, t_data *data)
 {
