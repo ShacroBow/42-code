@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:50:30 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/27 17:58:52 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:50:03 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	*ft_sendlength(int pid, const char *str)
 	while (i < 19)
 		buf[i++] = '\0';
 	if (len > 10000)
-		return (NULL);
+		return (write(2, "len error\n", 10), NULL);
 	if (len == 0)
 		return (ft_sendto_server(pid, "0"), (void *)str);
 	while (len > 0)
