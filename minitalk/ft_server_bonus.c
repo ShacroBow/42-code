@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:50:23 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/11 15:04:31 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:00:44 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	ft_readlength(void)
 	if ((g_var.ln < 6) && (g_var.byte == 0 && g_var.i > 7))
 	{
 		g_var.ln = ft_atoi(g_var.ptr);
+		write(1, g_var.ptr, g_var.count);
+		write(1, " = len\n", 7);
 		if (g_var.ln <= 5)
 			g_var.ln = 7;
 		if (g_var.ptr != NULL)
@@ -49,11 +51,9 @@ static void	ft_readlength(void)
 
 static void	ft_writeorping(siginfo_t *info)
 {
+	usleep(60);
 	if (g_var.ln < 6)
-	{
 		ft_readlength();
-	}
-	usleep(5);
 	if (g_var.ln > 5 && g_var.byte == 0 && g_var.i > 7)
 	{
 		write(1, g_var.ptr, g_var.count);
@@ -91,7 +91,7 @@ static void	ft_handler(int signal, siginfo_t *info, void *nothing)
 			free(g_var.ptr);
 			g_var.ptr = NULL;
 		}
-		g_var.ptr = ft_calloc(5, sizeof(unsigned char));
+		g_var.ptr = ft_calloc(12, sizeof(unsigned char));
 		if (g_var.ptr == NULL)
 			ft_mallocfail();
 	}

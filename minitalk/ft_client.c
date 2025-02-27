@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:26:21 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/02/11 13:40:53 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:57:31 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_sendbit(int pid, int signal)
 	int	check;
 
 	check = 0;
-	usleep(3);
+	usleep(20);
 	if (signal == SIGUSR1)
 	{
 		check = kill(pid, SIGUSR1);
@@ -80,7 +80,7 @@ static void	ft_sendto_server(int pid, const char *str)
 		ft_sendbit(pid, SIGUSR2);
 }
 
-static void	ft_sendlength(int pid, const char *str)
+static void	*ft_sendlength(int pid, const char *str)
 {
 	int		i;
 	int		len;
@@ -93,11 +93,10 @@ static void	ft_sendlength(int pid, const char *str)
 		len++;
 	while (i < 19)
 		buf[i++] = '\0';
+	if (len > 10000)
+		return (NULL);
 	if (len == 0)
-	{
-		ft_sendto_server(pid, "0");
-		return ;
-	}
+		return (ft_sendto_server(pid, "0"), (void *)str);
 	while (len > 0)
 	{
 		buf[--i] = (len % 10) + '0';
@@ -106,6 +105,7 @@ static void	ft_sendlength(int pid, const char *str)
 	buf[19] = '\0';
 	sendint = buf + i;
 	ft_sendto_server(pid, sendint);
+	return (sendint);
 }
 
 int	main(int argc, char **argv)
@@ -120,10 +120,7 @@ int	main(int argc, char **argv)
 	}
 	pid = ft_atoi(argv[1]);
 	if (kill(pid, 0) < 0)
-	{
-		write(1, "kill failed - pid incorrect?\n", 29);
-		return (1);
-	}
+		return (write(1, "kill failed - pid incorrect?\n", 29), 1);
 	sigemptyset(&(s_client.sa_mask));
 	s_client.sa_flags = SA_RESTART;
 	s_client.sa_handler = ft_handler;
@@ -131,7 +128,9 @@ int	main(int argc, char **argv)
 	ft_putnbr(getpid());
 	write(1, "]\n", 2);
 	ft_sigactionhandle(s_client);
-	ft_sendlength(pid, argv[2]);
-	ft_sendto_server(pid, argv[2]);
+	if (ft_sendlength(pid, argv[2]) != NULL)
+		ft_sendto_server(pid, argv[2]);
+	else
+		return (1);
 	return (0);
 }
