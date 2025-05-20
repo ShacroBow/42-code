@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/05/10 19:23:37 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:50:44 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ t_data	*ft_memoryhandling(t_data *data)
 
 void	*ft_datainit(t_data *data, char **av)
 {
-	data->philosophers = atoi(av[1]);
-	data->time_to_die = atoi(av[2]);
-	data->time_to_eat = atoi(av[3]);
-	data->time_to_sleep = atoi(av[4]);
+	data->philosophers = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	data->simulation_status = 0;
 	if (av[5] != NULL)
-		data->eat_goal = atoi(av[5]);
+		data->eat_goal = ft_atoi(av[5]);
 	else
 		data->eat_goal = -1;
 	data->threads = malloc((data->philosophers + 1) * (sizeof(t_philo *)));
@@ -87,7 +87,7 @@ static int	ft_monitor_simulation(t_data *d)
 {
 	while (1)
 	{
-		usleep(100);
+		usleep(50);
 		pthread_mutex_lock(d->update);
 		if (d->simulation_status <= 0)
 		{

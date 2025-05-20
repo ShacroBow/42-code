@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:45 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/05/10 18:44:36 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:59:58 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,39 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, t_philo **next)
 	(*ptr)->last_meal_time = ft_get_time();
 }
 
-static void	ft_philo_end(t_data *data, t_philo *ptr)
+static void	ft_philo_end(t_data *data, t_philo *ptr, int sim)
 {
-	print_status(ptr, "became fat");
-	pthread_mutex_lock(data->update);
-	data->simulation_status--;
-	pthread_mutex_unlock(data->update);
-	usleep(data->time_to_sleep + data->time_to_eat * 10000);
+	if (sim > 0)
+	{
+		print_status(ptr, "became fat");
+		pthread_mutex_lock(data->update);
+		data->simulation_status--;
+		pthread_mutex_unlock(data->update);
+		usleep(data->time_to_sleep + data->time_to_eat * 10000);
+		pthread_mutex_lock(data->barrier);
+		usleep(1000);
+		pthread_mutex_unlock(data->barrier);
+	}
+	else
+	{
+		pthread_mutex_lock(data->barrier);
+		usleep(1000);
+		pthread_mutex_unlock(data->barrier);
+	}
 	pthread_mutex_lock(data->barrier);
-	usleep(100);
+	usleep(10);
 	pthread_mutex_unlock(data->barrier);
 }
 
 static int	ft_philo_die(t_data *data, t_philo *ptr, t_philo *next, int *sim)
 {
-	if (((ft_get_time() - ptr->last_meal_time) > (data->time_to_die)) || !next)
+	if (!data || !ptr)
+		return (1);
+	pthread_mutex_lock(data->update);
+	*sim = data->simulation_status;
+	pthread_mutex_unlock(data->update);
+	if (((ft_get_time() - ptr->last_meal_time) > (data->time_to_die)) || !next \
+		|| !(*sim))
 	{
 		print_status(ptr, "died");
 		pthread_mutex_lock(data->update);
@@ -50,9 +68,6 @@ static int	ft_philo_die(t_data *data, t_philo *ptr, t_philo *next, int *sim)
 		pthread_mutex_unlock(data->update);
 		return (1);
 	}
-	pthread_mutex_lock(data->update);
-	*sim = data->simulation_status;
-	pthread_mutex_unlock(data->update);
 	return (0);
 }
 
@@ -66,8 +81,8 @@ void	*ft_philosopher(void *tmp)
 	data = (t_data *)tmp;
 	simulation = 1;
 	ft_philo_setup(data, &ptr, &next);
-	while ((ptr->meals_eaten < data->eat_goal || data->eat_goal == -1) && \
-			simulation > 0)
+	while ((ptr && data) && (ptr->meals_eaten < data->eat_goal \
+			|| data->eat_goal == -1) && simulation > 0)
 	{
 		if (ft_philo_die(data, ptr, next, &simulation))
 			break ;
@@ -80,7 +95,6 @@ void	*ft_philosopher(void *tmp)
 		print_status(ptr, "is sleeping");
 		usleep(data->time_to_sleep * 1000);
 	}
-	if (simulation > 0)
-		ft_philo_end(data, ptr);
+	ft_philo_end(data, ptr, simulation);
 	return (NULL);
 }

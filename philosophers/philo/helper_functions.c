@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/05/10 19:23:44 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:56:40 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ void	*ft_freedata(t_data *data, int sim)
 	int	i;
 
 	i = 0;
+	usleep(1000000);
 	while (i < data->philosophers && data->threads != NULL)
 	{
 		if (data->threads[i] == NULL)
 			break ;
 		pthread_join(data->threads[i]->thread, NULL);
 		free(data->threads[i]);
+		data->threads[i] = NULL;
 		i++;
 	}
 	if (data->threads)

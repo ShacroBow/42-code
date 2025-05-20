@@ -1,5 +1,5 @@
 NAME = philo
-SRC = main.c ft_philosopher.c ft_fat.c helper_functions.c
+SRC = main.c ft_philosopher.c ft_fat.c helper_functions.c ft_atoi.c
 OBJ_DIR = ./dir/
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 CC = cc

@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:48:55 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/05/10 19:27:04 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:21:41 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ long		ft_get_time(void);
 void		print_status(t_philo *philo, const char *status);
 void		*ft_validinput(int argc, char **argv);
 void		*ft_freedata(t_data *data, int sim);
+int			ft_atoi(const char *nptr);
 
 //drd, helgrind and --fair-sched=yes
 #endif
