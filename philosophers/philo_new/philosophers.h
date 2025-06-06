@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:48:55 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/01 20:55:32 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:57:55 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 
 typedef struct s_philo
 {
-	int			id;
-	long		last_meal_time;
-	int			meals_eaten;
-	pthread_t	thread;
-	int			fork_taken;
-	void		*data;
+	int				id;
+	long			last_meal_time;
+	int				meals_eaten;
+	pthread_t		thread;
+	pthread_mutex_t	fork;
+	void			*data;
 }	t_philo;
 
 typedef struct s_data
@@ -40,9 +40,9 @@ typedef struct s_data
 	int				eat_goal;
 	long int		epoch;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	*update;
-	pthread_mutex_t	*barrier;
+	pthread_mutex_t	print;
+	pthread_mutex_t	update;
+	pthread_mutex_t	barrier;
 	int				simulation_status;
 }	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/01 21:11:01 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:13:47 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ void	print_status(t_philo *philo, const char *status)
 	int		simulation;
 
 	data = (t_data *)philo->data;
-	pthread_mutex_lock(data->update);
+	pthread_mutex_lock(&data->update);
 	simulation = data->simulation_status;
-	pthread_mutex_unlock(data->update);
-	pthread_mutex_lock(data->print);
+	pthread_mutex_unlock(&data->update);
+	pthread_mutex_lock(&data->print);
 	if (simulation > 0 && (data->eat_goal > 0))
 		printf("%-5ld %2d %d %s\n", ft_get_time(data), philo->id + 1, \
 				philo->meals_eaten, status);
 	else if (simulation > 0 && data->eat_goal == -1)
 		printf("%-5ld %2d %s\n", ft_get_time(data), philo->id + 1, status);
-	pthread_mutex_unlock(data->print);
+	pthread_mutex_unlock(&data->print);
 }
 
 void	*ft_validinput(int argc, char **argv)
@@ -59,6 +59,19 @@ void	*ft_validinput(int argc, char **argv)
 	return (argv[0]);
 }
 
+static void	ft_forkit(t_data *data)
+{
+	int i;
+	
+	i = 0;
+	while (i < data->philosophers && data->fork != NULL)
+	{
+		pthread_mutex_destroy(&(data->fork[i]));
+		i++;
+	}
+	free(data->fork);
+}
+
 void	*ft_freedata(t_data *data, int sim)
 {
 	int	i;
@@ -68,7 +81,7 @@ void	*ft_freedata(t_data *data, int sim)
 	while (i < data->philosophers && data->threads != NULL)
 	{
 		if (data->threads[i] == NULL)
-			break ;
+		break ;
 		pthread_join(data->threads[i]->thread, NULL);
 		free(data->threads[i]);
 		data->threads[i] = NULL;
@@ -76,14 +89,10 @@ void	*ft_freedata(t_data *data, int sim)
 	}
 	if (data->threads)
 		free(data->threads);
-	pthread_mutex_destroy(data->fork);
-	pthread_mutex_destroy(data->print);
-	pthread_mutex_destroy(data->update);
-	pthread_mutex_destroy(data->barrier);
-	free(data->fork);
-	free(data->print);
-	free(data->update);
-	free(data->barrier);
+	ft_forkit(data);
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->update);
+	pthread_mutex_destroy(&data->barrier);
 	data->simulation_status = sim;
 	return (NULL);
 }
