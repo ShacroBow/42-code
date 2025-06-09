@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/06 18:13:47 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 03:09:46 by kha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	print_status(t_philo *philo, const char *status)
 	int		simulation;
 
 	data = (t_data *)philo->data;
+	pthread_mutex_lock(&data->print);
 	pthread_mutex_lock(&data->update);
 	simulation = data->simulation_status;
 	pthread_mutex_unlock(&data->update);
-	pthread_mutex_lock(&data->print);
 	if (simulation > 0 && (data->eat_goal > 0))
 		printf("%-5ld %2d %d %s\n", ft_get_time(data), philo->id + 1, \
 				philo->meals_eaten, status);
@@ -77,7 +77,6 @@ void	*ft_freedata(t_data *data, int sim)
 	int	i;
 
 	i = 0;
-	usleep(1000000);
 	while (i < data->philosophers && data->threads != NULL)
 	{
 		if (data->threads[i] == NULL)

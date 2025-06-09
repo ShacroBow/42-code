@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/06 20:42:01 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 03:17:09 by kha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	ft_monitor_simulation(t_data *d)
 		pthread_mutex_unlock(&d->update);
 	}
 	pthread_mutex_lock(&d->barrier);
-	usleep(10000);
+	ft_usleep(100, d, NULL);
 	pthread_mutex_unlock(&d->barrier);
 	ft_freedata(d, 0);
 	if (d->simulation_status == -1)

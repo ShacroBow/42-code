@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:48:55 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/06 16:57:55 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 03:09:50 by kha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		print_status(t_philo *philo, const char *status);
 void		*ft_validinput(int argc, char **argv);
 void		*ft_freedata(t_data *data, int sim);
 int			ft_atoi(const char *nptr);
-void		ft_usleep(long duration_ms, t_data *data, t_philo *ptr, \
-					t_philo *next);
+void		ft_usleep(long duration_ms, t_data *data, t_philo *ptr);
+int			ft_philo_die(t_data *data, t_philo *ptr, int *sim);
+
 
 //drd, helgrind and --fair-sched=yes
 #endif

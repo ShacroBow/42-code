@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philosopher.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:45 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/06 20:44:23 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 04:21:43 by kha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, t_philo **next)
 		(*next) = data->threads[0];
 	pthread_mutex_unlock(&data->update);
 	pthread_mutex_lock(&data->barrier);
-	usleep(10);
 	pthread_mutex_unlock(&data->barrier);
-	if ((*ptr)->id % 2 == 0)
-		usleep(1000);
-	else
-		usleep(500);
 	(*ptr)->last_meal_time = ft_get_time(data);
 }
 
@@ -41,21 +36,16 @@ static void	ft_philo_end(t_data *data, t_philo *ptr, int sim)
 		pthread_mutex_unlock(&data->update);
 		usleep(data->time_to_sleep + data->time_to_eat * 10000);
 		pthread_mutex_lock(&data->barrier);
-		usleep(1000);
-		pthread_mutex_unlock(&data->barrier);
-	}
-	else
-	{
-		pthread_mutex_lock(&data->barrier);
-		usleep(1000);
+		ft_usleep(10000000000, data, ptr);
 		pthread_mutex_unlock(&data->barrier);
 	}
 	pthread_mutex_lock(&data->barrier);
-	usleep(1000);
+	ft_usleep(100000000000, data, ptr);
 	pthread_mutex_unlock(&data->barrier);
+	usleep(10000);
 }
 
-static int	ft_philo_die(t_data *data, t_philo *ptr, t_philo *next, int *sim)
+int	ft_philo_die(t_data *data, t_philo *ptr, int *sim)
 {
 	if (!data || !ptr)
 		return (1);
@@ -63,7 +53,7 @@ static int	ft_philo_die(t_data *data, t_philo *ptr, t_philo *next, int *sim)
 	*sim = data->simulation_status;
 	pthread_mutex_unlock(&data->update);
 	if (((ft_get_time(data) - ptr->last_meal_time) > (data->time_to_die)) || \
-		!next || !(*sim))
+		!(*sim))
 	{
 		print_status(ptr, "died");
 		pthread_mutex_lock(&data->update);
@@ -75,7 +65,7 @@ static int	ft_philo_die(t_data *data, t_philo *ptr, t_philo *next, int *sim)
 	return (0);
 }
 
-void	ft_usleep(long duration_ms, t_data *data, t_philo *ptr, t_philo *next)
+void	ft_usleep(long duration_ms, t_data *data, t_philo *ptr)
 {
 	long	finish;
 	int		sim;
@@ -84,9 +74,9 @@ void	ft_usleep(long duration_ms, t_data *data, t_philo *ptr, t_philo *next)
 	finish = ft_get_time(data) + duration_ms;
 	while (ft_get_time(data) < finish)
 	{
-		if (ft_philo_die(data, ptr, next, &sim))
+		if (ptr && ft_philo_die(data, ptr, &sim))
 			break ;
-		usleep(100);
+		usleep(500);
 	}
 }
 
@@ -103,14 +93,14 @@ void	*ft_philosopher(void *tmp)
 	while ((ptr && data) && (ptr->meals_eaten < data->eat_goal \
 			|| data->eat_goal == -1) && simulation > 0)
 	{
-		if (ft_philo_die(data, ptr, next, &simulation))
+		if (ft_philo_die(data, ptr, &simulation))
 			break ;
 		ft_fat(ptr, data, next, simulation);
-		if (ft_philo_die(data, ptr, next, &simulation))
+		if (ft_philo_die(data, ptr, &simulation))
 			break ;
 		print_status(ptr, "is sleeping");
-		ft_usleep(data->time_to_sleep, data, ptr, next);
-		if (ft_philo_die(data, ptr, next, &simulation))
+		ft_usleep(data->time_to_sleep, data, ptr);
+		if (ft_philo_die(data, ptr, &simulation))
 			break ;
 		print_status(ptr, "is thinking");
 	}
