@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 15:38:18 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:44:32 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,6 @@ void	*ft_datainit(t_data *data, char **av)
 	if (pthread_mutex_init(&data->barrier, NULL))
 		return (ft_freedata(data, -1), NULL);
 	return (data);
-}
-
-static int	ft_monitor_simulation(t_data *d)
-{
-	while (1)
-	{
-		usleep(50);
-		pthread_mutex_lock(&d->update);
-		if (d->simulation_status <= 0)
-		{
-			pthread_mutex_unlock(&d->update);
-			break ;
-		}
-		pthread_mutex_unlock(&d->update);
-	}
-	pthread_mutex_lock(&d->barrier);
-	ft_usleep(100, d, NULL);
-	pthread_mutex_unlock(&d->barrier);
-	ft_freedata(d, 0);
-	if (d->simulation_status == -1)
-		return (1);
-	return (0);
 }
 
 int	main(int argc, char **argv)

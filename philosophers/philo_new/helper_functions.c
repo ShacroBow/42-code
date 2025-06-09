@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 15:37:50 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:57:49 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	print_status(t_philo *philo, const char *status)
 	pthread_mutex_lock(&data->update);
 	simulation = data->simulation_status;
 	pthread_mutex_unlock(&data->update);
-	if (simulation > 0 && (data->eat_goal > 0))
-		printf("%-5ld %2d %d %s\n", ft_get_time(data), philo->id + 1, \
-				philo->meals_eaten, status);
+	if (simulation > 0 && (data->eat_goal > 0) && \
+		philo->meals_eaten <= data->eat_goal)
+		printf("%-5ld %2d %s\n", ft_get_time(data), philo->id + 1, status);
 	else if (simulation > 0 && data->eat_goal == -1)
 		printf("%-5ld %2d %s\n", ft_get_time(data), philo->id + 1, status);
 	pthread_mutex_unlock(&data->print);
@@ -77,7 +77,7 @@ void	*ft_freedata(t_data *data, int sim)
 	int	i;
 
 	i = 0;
-	usleep(1000);
+	usleep(10000);
 	while (i < data->philosophers && data->threads != NULL)
 	{
 		if (data->threads[i] == NULL)

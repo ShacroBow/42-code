@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:48:55 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 15:38:29 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:21:27 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_data
 
 void		*ft_philosopher(void *tmp);
 void		print_status(t_philo *philo, const char *status);
-int			ft_fat(t_philo *ptr, t_data *data, t_philo *next, int simulation);
+int			ft_fat(t_philo *ptr, t_data *data, int next);
 long		ft_get_time(t_data *data);
 void		print_status(t_philo *philo, const char *status);
 void		*ft_validinput(int argc, char **argv);
@@ -56,6 +56,7 @@ void		*ft_freedata(t_data *data, int sim);
 int			ft_atoi(const char *nptr);
 void		ft_usleep(long duration_ms, t_data *data, t_philo *ptr);
 int			ft_philo_die(t_data *data, t_philo *ptr, int *sim);
+int			ft_monitor_simulation(t_data *d);
 
 //drd, helgrind and --fair-sched=yes
 #endif
