@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philosopher.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:45 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 04:21:43 by kha              ###   ########.fr       */
+/*   Updated: 2025/06/09 15:35:21 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, t_philo **next)
 	pthread_mutex_lock(&data->barrier);
 	pthread_mutex_unlock(&data->barrier);
 	(*ptr)->last_meal_time = ft_get_time(data);
+	if (*next == NULL)
+	{
+		(*ptr)->last_meal_time = 0;
+		ft_usleep(data->time_to_die + 10, data, *ptr);
+	}
 }
 
 static void	ft_philo_end(t_data *data, t_philo *ptr, int sim)
@@ -76,7 +81,7 @@ void	ft_usleep(long duration_ms, t_data *data, t_philo *ptr)
 	{
 		if (ptr && ft_philo_die(data, ptr, &sim))
 			break ;
-		usleep(500);
+		usleep(100);
 	}
 }
 

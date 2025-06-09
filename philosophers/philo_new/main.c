@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 03:17:09 by kha              ###   ########.fr       */
+/*   Updated: 2025/06/09 15:38:18 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_data	*ft_memoryhandling(t_data *data)
 	while (i < data->philosophers)
 	{
 		if (pthread_mutex_init(&data->fork[i], NULL))
-		return (ft_freedata(data, -1), NULL);
+			return (ft_freedata(data, -1), NULL);
 		i++;
 	}
 	return (data);

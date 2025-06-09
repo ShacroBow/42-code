@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 03:09:46 by kha              ###   ########.fr       */
+/*   Updated: 2025/06/09 15:37:50 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	*ft_validinput(int argc, char **argv)
 
 static void	ft_forkit(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < data->philosophers && data->fork != NULL)
 	{
@@ -77,10 +77,11 @@ void	*ft_freedata(t_data *data, int sim)
 	int	i;
 
 	i = 0;
+	usleep(1000);
 	while (i < data->philosophers && data->threads != NULL)
 	{
 		if (data->threads[i] == NULL)
-		break ;
+			break ;
 		pthread_join(data->threads[i]->thread, NULL);
 		free(data->threads[i]);
 		data->threads[i] = NULL;

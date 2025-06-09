@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kha <kha@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:35 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 04:05:59 by kha              ###   ########.fr       */
+/*   Updated: 2025/06/09 15:33:10 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_fat(t_philo *ptr, t_data *data, t_philo *next, int simulation)
 {
-	if (simulation < 1)
+	if (simulation < 1 || !next)
 		return (1);
 	if (ptr->id % 2)
 	{
