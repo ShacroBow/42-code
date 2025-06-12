@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 19:57:49 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:48:45 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	print_status(t_philo *philo, const char *status)
 		printf("%-5ld %2d %s\n", ft_get_time(data), philo->id + 1, status);
 	pthread_mutex_unlock(&data->print);
 }
+//printf("%-5ld %2d %d %s\n", ft_get_time(), philo->id, philo->meals_eaten, status);
 
 void	*ft_validinput(int argc, char **argv)
 {

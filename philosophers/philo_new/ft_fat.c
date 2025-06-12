@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:35 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 19:45:39 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:46:04 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	ft_fat(t_philo *ptr, t_data *data, int next)
 		pthread_mutex_lock(&(data->fork[ptr->id]));
 	}
 	print_status(ptr, "has taken a fork");
-	ptr->meals_eaten += 1;
 	pthread_mutex_lock(&data->update);
+	ptr->meals_eaten += 1;
 	ptr->last_meal_time = ft_get_time(data);
 	pthread_mutex_unlock(&data->update);
 	print_status(ptr, "is eating");

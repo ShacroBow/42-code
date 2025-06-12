@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:45 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 19:52:39 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:46:48 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, int *next)
 	{
 		usleep(10);
 	}
-	
 }
 
 static void	ft_philo_end(t_data *data, t_philo *ptr)
 {
-	int sim;
+	int	sim;
 
 	sim = 0;
 	pthread_mutex_lock(&data->update);
@@ -75,7 +74,6 @@ int	ft_philo_die(t_data *data, t_philo *ptr, int *sim)
 		return (1);
 	}
 	pthread_mutex_unlock(&data->update);
-	
 	return (0);
 }
 

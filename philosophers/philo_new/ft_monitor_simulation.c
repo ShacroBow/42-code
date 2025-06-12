@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/09 19:45:12 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:45:47 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ static int	check_if_all_fat(t_data *data)
 		return (0);
 	i = 0;
 	all_fat = 1;
+	pthread_mutex_lock(&data->update);
 	while (i < data->philosophers)
 	{
-		pthread_mutex_lock(&data->update);
 		if (data->threads[i]->meals_eaten < data->eat_goal)
 			all_fat = 0;
-		pthread_mutex_unlock(&data->update);
 		i++;
 	}
 	if (all_fat)
 		data->simulation_status = 0;
+	pthread_mutex_unlock(&data->update);
 	return (all_fat);
 }
 
