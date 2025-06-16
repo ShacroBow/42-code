@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/12 17:45:30 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:21:30 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	main(int argc, char **argv)
 		if (pthread_create(&(ptr->thread), NULL, ft_philosopher, &data) != 0)
 		{
 			pthread_mutex_unlock(&data.barrier);
-			data.simulation_status = -1;
 			return (ft_freedata(&data, -1), 1);
 		}
 		i++;

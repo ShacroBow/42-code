@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:45 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/12 18:34:47 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:13:31 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, int *next)
 	(*ptr) = (t_philo *)data->threads[data->simulation_status];
 	data->simulation_status++;
 	(*next) = (*ptr)->id + 1;
-	if ((*ptr)->id == (data->philosophers - 1) || data->philosophers > 1)
+	if ((*ptr)->id == (data->philosophers - 1) && data->philosophers > 1)
 		(*next) = 0;
 	pthread_mutex_unlock(&data->update);
 	pthread_mutex_lock(&data->barrier);
@@ -26,7 +26,7 @@ static void	ft_philo_setup(t_data *data, t_philo **ptr, int *next)
 	pthread_mutex_lock(&data->update);
 	(*ptr)->last_meal_time = ft_get_time(data);
 	pthread_mutex_unlock(&data->update);
-	if (*next == (*ptr)->id && data->philosophers <= 1)
+	if (data->philosophers <= 1)
 	{
 		(*ptr)->last_meal_time = 0;
 		ft_usleep(data->time_to_die + 10, data, *ptr);
