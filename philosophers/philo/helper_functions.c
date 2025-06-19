@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/19 14:27:44 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:53:13 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*ft_validinput(int argc, char **argv)
 		i = 0;
 		while (argv[j][i])
 		{
-			if (!(argv[j][i] >= 48 && argv[j][i] <= 57))
+			if (!(argv[j][i] >= 48 && argv[j][i] <= 57) || i > 8)
 				return (NULL);
 			i++;
 		}
