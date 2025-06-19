@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:46:37 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/16 14:21:30 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:23:45 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,29 @@ void	*ft_datainit(t_data *data, char **av)
 	return (data);
 }
 
+void	ft_usleep(long duration_ms, t_data *data, t_philo *ptr)
+{
+	long	finish;
+	int		sim;
+
+	sim = 1;
+	finish = ft_get_time(data) + duration_ms;
+	while (ft_get_time(data) < finish && sim > 0)
+	{
+		if (ptr && ft_philo_die(data, ptr, &sim))
+			break ;
+		usleep(100);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
 	t_data	data;
 	t_philo	*ptr;
 
-	if (!(argc >= 5 && argc <= 6) || !ft_validinput(argc, argv))
-		return (1);
-	if (ft_datainit(&data, argv) == NULL)
+	if (!(argc >= 5 && argc <= 6) || !ft_validinput(argc, argv) || \
+		ft_datainit(&data, argv) == NULL)
 		return (1);
 	i = 0;
 	pthread_mutex_lock(&data.barrier);
@@ -98,12 +112,15 @@ int	main(int argc, char **argv)
 		ptr = data.threads[i];
 		if (pthread_create(&(ptr->thread), NULL, ft_philosopher, &data) != 0)
 		{
+			pthread_mutex_lock(&data.update);
+			data.simulation_status = -1;
+			data.threads[i]->thread = 0;
+			pthread_mutex_unlock(&data.update);
 			pthread_mutex_unlock(&data.barrier);
 			return (ft_freedata(&data, -1), 1);
 		}
 		i++;
 	}
 	data.epoch = ft_get_time(&data);
-	pthread_mutex_unlock(&data.barrier);
-	return (ft_monitor_simulation(&data));
+	return (pthread_mutex_unlock(&data.barrier), ft_monitor_simulation(&data));
 }

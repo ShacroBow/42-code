@@ -6,11 +6,19 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:43:35 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/12 17:46:04 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:22:58 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static void	ft_quick(t_philo *ptr, t_data *data)
+{
+	pthread_mutex_lock(&data->update);
+	if (ptr->meals_eaten == data->eat_goal)
+		ptr->meals_eaten += 1;
+	pthread_mutex_unlock(&data->update);
+}
 
 int	ft_fat(t_philo *ptr, t_data *data, int next)
 {
@@ -35,7 +43,6 @@ int	ft_fat(t_philo *ptr, t_data *data, int next)
 	ft_usleep(data->time_to_eat, data, ptr);
 	pthread_mutex_unlock(&(data->fork[ptr->id]));
 	pthread_mutex_unlock(&(data->fork[next]));
-	if (ptr->meals_eaten == data->eat_goal)
-		ptr->meals_eaten += 1;
+	ft_quick(ptr, data);
 	return (0);
 }

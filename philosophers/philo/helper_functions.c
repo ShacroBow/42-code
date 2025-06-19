@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 19:15:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/12 18:37:07 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:27:44 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	*ft_freedata(t_data *data, int sim)
 	{
 		if (data->threads[i] == NULL)
 			break ;
-		pthread_join(data->threads[i]->thread, NULL);
+		if (data->threads[i]->thread)
+			pthread_join(data->threads[i]->thread, NULL);
 		free(data->threads[i]);
 		data->threads[i] = NULL;
 		i++;

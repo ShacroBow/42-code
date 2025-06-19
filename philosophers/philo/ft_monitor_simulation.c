@@ -6,7 +6,7 @@
 /*   By: kmashkoo <kmashkoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:56 by kmashkoo          #+#    #+#             */
-/*   Updated: 2025/06/12 17:45:47 by kmashkoo         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:15:47 by kmashkoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ static int	check_if_all_fat(t_data *data)
 	return (all_fat);
 }
 
+static int	ft_skipper(t_data *data, int i)
+{
+	pthread_mutex_lock(&data->update);
+	if (data->eat_goal > 0 && data->threads[i] && \
+		data->threads[i]->meals_eaten >= data->eat_goal)
+	{
+		pthread_mutex_unlock(&data->update);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->update);
+	return (0);
+}
+
 static int	check_for_death(t_data *data)
 {
 	int	i;
@@ -41,8 +54,7 @@ static int	check_for_death(t_data *data)
 	i = 0;
 	while (i < data->philosophers)
 	{
-		while (data->eat_goal > 0 && data->threads[i] && \
-			data->threads[i]->meals_eaten >= data->eat_goal)
+		while (ft_skipper(data, i))
 			i++;
 		if (i >= data->philosophers)
 			break ;
